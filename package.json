@@ -1,25 +1,35 @@
 {
-  "name": "sri-checker",
-  "version": "0.0.1",
-  "description": "Subresource integrity checker for given URLs",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/StotoV/sri-checker.git"
-  },
-  "keywords": [
-    "sri",
-    "subresource integrity",
-    "plugin",
-    "json"
-  ],
-  "author": "Tom Stock",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/StotoV/sri-checker/issues"
-  },
-  "homepage": "https://github.com/StotoV/sri-checker#readme"
+    "name": "sri-checker",
+    "version": "0.0.1",
+    "description": "Subresource integrity checker for given URLs",
+    "main": "./src/index.js",
+    "scripts": {
+        "start": "./index.js",
+        "test": "mocha"
+    },
+    "bin": {
+        "sri-checker": "./index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/StotoV/sri-checker.git"
+    },
+    "keywords": [
+        "sri",
+        "subresource integrity",
+        "plugin",
+        "json"
+    ],
+    "author": "Tom Stock",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/StotoV/sri-checker/issues"
+    },
+    "homepage": "https://github.com/StotoV/sri-checker#readme",
+    "dependencies": {
+        "argparse": "^2.0.1"
+    },
+    "devDependencies": {
+        "mocha": "^9.1.3"
+    }
 }
