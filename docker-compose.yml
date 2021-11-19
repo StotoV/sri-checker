@@ -1,0 +1,7 @@
+services:
+  sri:
+    build: .
+    restart: always
+    volumes:
+      - ./:/app/
+      - /app/node_modules
