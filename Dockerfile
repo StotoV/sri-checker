@@ -51,6 +51,8 @@ COPY . ./
 # Install executable
 RUN npm install -g .
 
-USER node
+# USER node
 
-CMD ["npm", "start", "--", "https://googlechrome.github.io/samples/subresource-integrity/", "-o", "./output/out.json"]
+# CMD ["npm", "test"]
+# CMD ["npm", "start", "--", "https://googlechrome.github.io/samples/subresource-integrity/", "-o", "./output/out.json"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]

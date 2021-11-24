@@ -22,7 +22,7 @@ global.logger = createLogger({
 logger.debug('Logging initialized')
 // END CONFIG logger
 
-const scrape = require('./scrape.js')
+const scraper = require('./scraper.js')
 const existence = require('./tag_existence.js')
 const fs = require('fs');
 
@@ -37,7 +37,8 @@ const fs = require('fs');
 async function checkURL (URL, outPath) {
     logger.verbose('checkURL called with URL: ' + URL + ' and outPath: ' + outPath)
 
-    var out = JSON.stringify(await scrape(URL))
+    await scraper.init()
+    var out = JSON.stringify(await scraper.scrape(URL))
     await fs.writeFileSync(outPath + 'scrape.json', out);
 
     out = JSON.stringify(await existence(out))
@@ -48,5 +49,6 @@ async function checkURL (URL, outPath) {
 
 module.exports = {
     checkURL: checkURL,
+    scrape: scraper.scrape,
     tagExistence: existence
 }
