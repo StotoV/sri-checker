@@ -23,7 +23,7 @@ logger.debug('Logging initialized')
 // END CONFIG logger
 
 const scrape = require('./scrape.js')
-const existence = require('./tag_existence.js')
+const usage = require('./tag_usage.js')
 const fs = require('fs');
 
 /**
@@ -40,13 +40,13 @@ async function checkURL (URL, outPath) {
     var out = JSON.stringify(await scrape(URL))
     await fs.writeFileSync(outPath + 'scrape.json', out);
 
-    out = JSON.stringify(await existence(out))
-    await fs.writeFileSync(outPath + 'existence.json', out);
+    out = JSON.stringify(await usage(out))
+    await fs.writeFileSync(outPath + 'usage.json', out);
 
     logger.verbose('Done with all tests for URL: ' + URL)
 }
 
 module.exports = {
     checkURL: checkURL,
-    tagExistence: existence
+    tagUsage: usage
 }

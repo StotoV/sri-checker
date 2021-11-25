@@ -22,6 +22,8 @@ const log = logger.child({module: 'scraper'})
  *      'hreflang': (String|undefined)
  * }>}                                  The scraped elements in JSON format
  *
+ * @TODO        Do not include tags with no url
+ * @TODO        Do not include tags with URL on same server
  * @TODO        Also scrape other subresouces (a, img, iframe, ...)
  */
 async function scrape(URL) {
