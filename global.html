@@ -104,95 +104,19 @@
     
 
     
-    <h4 class="name" id="checkURL"><span class="type-signature">(async) </span>checkURL<span class="signature">(URL, outPath)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkHashes"><span class="type-signature"></span>checkHashes<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
-<div class="description">
-    Runs the full SRI check on the given URL
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>URL</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The URL that will be checked on SRI implementation</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>outPath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The location where the results will be written. Must be a JSON file</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -228,7 +152,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line37">line 37</a>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -240,7 +164,284 @@
     <dt class="tag-todo">To Do:</dt>
     <dd class="tag-todo">
         <ul>
-            <li>Add input validation on params</li>
+            <li>Add improvement messages
+ * Weak hashing algo
+ * Not all hashes match, it will accept multiple resources</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkHashes"><span class="type-signature"></span>checkHashes<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Add improvement messages
+ * Weak hashing algo
+ * Not all hashes match, it will accept multiple resources</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkResponseEligibility"><span class="type-signature"></span>checkResponseEligibility<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Finish this and the tests</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkResponseEligibility"><span class="type-signature"></span>checkResponseEligibility<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Finish this and the tests</li>
         </ul>
     </dd>
     
@@ -438,7 +639,832 @@
     
 
     
-    <h4 class="name" id="scrape"><span class="type-signature">(async) </span>scrape<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+    <h4 class="name" id="checkURL"><span class="type-signature">(async) </span>checkURL<span class="signature">(URL, outPath)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Runs the full SRI check on the given URL
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>URL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The URL that will be checked on SRI implementation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>outPath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The location where the results will be written. Must be a JSON file</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Add input validation on params</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scrape"><span class="type-signature">(async) </span>scrape<span class="signature">(URL)</span><span class="type-signature"> &rarr; {Array.&lt;{'element': String, 'type': String, 'integrity': String, 'cross_origin': String, 'referrerpolicy': String, 'defer': String, 'src': (String|undefined), 'href': (String|undefined), 'async': (String|undefined), 'nomodule': (String|undefined), 'title': (String|undefined), 'media': (String|undefined), 'sizes': (String|undefined), 'rel': (String|undefined), 'hreflang': (String|undefined)}>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Scrapes the given URL on SRI relevant tags
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>URL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The URL that will be scraped</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scrape.js.html">scrape.js</a>, <a href="scrape.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Do not include tags with no url</li>
+        
+            <li>Do not include tags with URL on same server</li>
+        
+            <li>Also scrape other subresouces (a, img, iframe, ...)</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The scraped elements in JSON format
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;{'element': String, 'type': String, 'integrity': String, 'cross_origin': String, 'referrerpolicy': String, 'defer': String, 'src': (String|undefined), 'href': (String|undefined), 'async': (String|undefined), 'nomodule': (String|undefined), 'title': (String|undefined), 'media': (String|undefined), 'sizes': (String|undefined), 'rel': (String|undefined), 'hreflang': (String|undefined)}></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scrape"><span class="type-signature">(async) </span>scrape<span class="signature">(URL)</span><span class="type-signature"> &rarr; {Array.&lt;{'element': String, 'type': String, 'integrity': String, 'cross_origin': String, 'referrerpolicy': String, 'defer': String, 'src': (String|undefined), 'href': (String|undefined), 'async': (String|undefined), 'nomodule': (String|undefined), 'title': (String|undefined), 'media': (String|undefined), 'sizes': (String|undefined), 'rel': (String|undefined), 'hreflang': (String|undefined)}>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Scrapes the given URL on SRI relevant tags
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>URL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The URL that will be scraped</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scrape.js.html">scrape.js</a>, <a href="scrape.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Do not include tags with no url</li>
+        
+            <li>Do not include tags with URL on same server</li>
+        
+            <li>Also scrape other subresouces (a, img, iframe, ...)</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The scraped elements in JSON format
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;{'element': String, 'type': String, 'integrity': String, 'cross_origin': String, 'referrerpolicy': String, 'defer': String, 'src': (String|undefined), 'href': (String|undefined), 'async': (String|undefined), 'nomodule': (String|undefined), 'title': (String|undefined), 'media': (String|undefined), 'sizes': (String|undefined), 'rel': (String|undefined), 'hreflang': (String|undefined)}></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="tagUsage"><span class="type-signature">(async) </span>tagUsage<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;{'integrity': boolean, 'cross_origin': boolean}>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks the usage of SRI tags on the given elements
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{'integrity': String, 'cross_origin': String}></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The elements to check the tag existence for</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tag_usage.js.html">tag_usage.js</a>, <a href="tag_usage.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The array indicating for each element if they have an non-empty integrity and cross origin tag
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;{'integrity': boolean, 'cross_origin': boolean}></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="tagUsage"><span class="type-signature">(async) </span>tagUsage<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;{'integrity': boolean, 'cross_origin': boolean}>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks the usage of SRI tags on the given elements
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{'integrity': String, 'cross_origin': String}></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The elements to check the tag existence for</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tag_usage.js.html">tag_usage.js</a>, <a href="tag_usage.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The array indicating for each element if they have an non-empty integrity and cross origin tag
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;{'integrity': boolean, 'cross_origin': boolean}></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="tagValidity"><span class="type-signature">(async) </span>tagValidity<span class="signature">(elements)</span><span class="type-signature"></span></h4>
     
 
     
@@ -539,7 +1565,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line13">line 13</a>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -547,6 +1573,15 @@
 
     
 
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Update docs</li>
+        
+            <li>Add recommendations/warnings/errors for the user</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -568,22 +1603,16 @@
 
         
 <div class="param-desc">
-    The array indicating for each element if they have are valid
+    {Array.<{
+     'recommendations': Array.<{
+         'severity': Integer,
+         'recommendation': String
+     }>,
+     'error': String
+>}                   The array indicating for each element if they have are valid
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;boolean></span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -597,7 +1626,7 @@
     
 
     
-    <h4 class="name" id="scrape"><span class="type-signature">(async) </span>scrape<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;boolean>}</span></h4>
+    <h4 class="name" id="tagValidity"><span class="type-signature">(async) </span>tagValidity<span class="signature">(elements)</span><span class="type-signature"></span></h4>
     
 
     
@@ -698,166 +1727,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line13">line 13</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The array indicating for each element if they have are valid
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;boolean></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="tagExistence"><span class="type-signature">(async) </span>tagExistence<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;{'integrity': boolean, 'cross_origin': boolean}>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Checks the existence of SRI tags on the given elements
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;{'integrity': String, 'cross_origin': String}></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The elements to check the tag existence for</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tag_existence.js.html">tag_existence.js</a>, <a href="tag_existence.js.html#line17">line 17</a>
+        <a href="tar_validity.js.html">tar_validity.js</a>, <a href="tar_validity.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -869,7 +1739,9 @@
     <dt class="tag-todo">To Do:</dt>
     <dd class="tag-todo">
         <ul>
-            <li>Discussion: how to handle non-existing integrity/cross-origin tags?</li>
+            <li>Update docs</li>
+        
+            <li>Add recommendations/warnings/errors for the user</li>
         </ul>
     </dd>
     
@@ -893,188 +1765,16 @@
 
         
 <div class="param-desc">
-    The array indicating for each element if they have a integrity and cross origin tag
+    {Array.<{
+     'recommendations': Array.<{
+         'severity': Integer,
+         'recommendation': String
+     }>,
+     'error': String
+>}                   The array indicating for each element if they have are valid
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;{'integrity': boolean, 'cross_origin': boolean}></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="tagExistence"><span class="type-signature">(async) </span>tagExistence<span class="signature">(elements)</span><span class="type-signature"> &rarr; {Array.&lt;{'integrity': boolean, 'cross_origin': boolean}>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Checks the existence of SRI tags on the given elements
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;{'integrity': String, 'cross_origin': String}></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The elements to check the tag existence for</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tag_existence.js.html">tag_existence.js</a>, <a href="tag_existence.js.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Discussion: how to handle non-existing integrity/cross-origin tags?</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The array indicating for each element if they have a integrity and cross origin tag
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;{'integrity': boolean, 'cross_origin': boolean}></span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -1098,13 +1798,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkURL">checkURL</a></li><li><a href="global.html#scrape">scrape</a></li><li><a href="global.html#tagExistence">tagExistence</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkHashes">checkHashes</a></li><li><a href="global.html#checkResponseEligibility">checkResponseEligibility</a></li><li><a href="global.html#checkURL">checkURL</a></li><li><a href="global.html#scrape">scrape</a></li><li><a href="global.html#tagUsage">tagUsage</a></li><li><a href="global.html#tagValidity">tagValidity</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed Nov 24 2021 09:04:11 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sun Nov 28 2021 08:35:04 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
