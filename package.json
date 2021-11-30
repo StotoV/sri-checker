@@ -1,0 +1,44 @@
+{
+    "name": "sri-checker",
+    "version": "0.0.1",
+    "description": "Subresource integrity checker for given URLs",
+    "main": "./src/index.js",
+    "scripts": {
+        "start": "./index.js",
+        "test": "mocha",
+        "docs": "jsdoc -c ./jsdoc.conf"
+    },
+    "bin": {
+        "sri-checker": "./index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/StotoV/sri-checker.git"
+    },
+    "keywords": [
+        "sri",
+        "subresource integrity",
+        "plugin",
+        "json"
+    ],
+    "author": "Tom Stock",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/StotoV/sri-checker/issues"
+    },
+    "homepage": "https://github.com/StotoV/sri-checker#readme",
+    "dependencies": {
+        "argparse": "^2.0.1",
+        "puppeteer": "^11.0.0",
+        "tracker-radar-collector": "github:duckduckgo/tracker-radar-collector",
+        "url-parse": "^1.5.3",
+        "winston": "^3.3.3"
+    },
+    "devDependencies": {
+        "connect": "^3.7.0",
+        "jsdoc": "^3.6.7",
+        "mocha": "^9.1.3",
+        "rewire": "^5.0.0",
+        "serve-static": "^1.14.1"
+    }
+}
