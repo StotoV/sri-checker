@@ -36,23 +36,3 @@ jobs:
       
       - name: Test
         run: npm test
-
-  deploy_docs:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run JSDoc
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./src
-          output_dir: ./docs
-          config_file: jsdoc.conf
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
