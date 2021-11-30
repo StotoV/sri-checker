@@ -6,7 +6,7 @@ const log = logger.child({module: 'scraper'})
 
 class SRITagCollector {
     id() {
-        return 'SRI tags'
+        return 'SRITag'
     }
 
     /**
@@ -98,18 +98,17 @@ class SRITagCollector {
  */
 async function scrape(URL) {
     log.verbose('Starting scraping ' + URL)
-    var out = []
 
     const collectors = [new RequestCollector(), new SRITagCollector()]
-    const res = await crawler(new url.URL(URL), {
+    var out = await crawler(new url.URL(URL), {
         collectors: collectors,
         log: (msg) => {log.verbose('[Crawler] ' + msg)},
         runInEveryFrame: true,
         executablePath: '/usr/bin/chromium'
     })
 
-    log.verbose(JSON.stringify(res, null, 2))
-
+    log.verbose(JSON.stringify(out, null, 2))
+    out = out.data.SRITag
     log.verbose('Done scraping ' + URL)
     return out
 }
