@@ -15,6 +15,7 @@ const log = logger.child({module: 'tagExistence'})
  */
 async function tagUsage(elements) {
     log.verbose('Starting tag usage check')
+    
     var out = []
     for (const element of elements) {
         out.push({

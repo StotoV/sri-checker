@@ -40,10 +40,11 @@ async function checkURL (URL, outPath) {
     var out = JSON.stringify(await scrape(URL))
     await fs.writeFileSync(outPath + 'scrape.json', out);
 
-    out = JSON.stringify(await usage(out))
-    await fs.writeFileSync(outPath + 'usage.json', out);
+    // out = JSON.stringify(await usage(out))
+    // await fs.writeFileSync(outPath + 'usage.json', out);
 
     logger.verbose('Done with all tests for URL: ' + URL)
+    process.exit(0)
 }
 
 module.exports = {
