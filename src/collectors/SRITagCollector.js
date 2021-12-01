@@ -47,7 +47,7 @@ class SRITagCollector {
         for (const node of nodes) {
             const rawAttrs = await this._cdpClient.send('DOM.getAttributes', {nodeId: node.nodeId})
             var attrs = {}
-            for (var i=0; i < Math.floor((rawAttrs.attributes.length/2)); i+=2) {
+            for (var i=0; i < rawAttrs.attributes.length; i+=2) {
                 attrs[rawAttrs.attributes[i]] = rawAttrs.attributes[i+1]
             }
 
