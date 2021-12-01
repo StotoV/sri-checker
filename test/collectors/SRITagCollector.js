@@ -1,27 +1,36 @@
 const assert = require('assert');
 
-function getFakeCDPClient(tree, attrs) {
-    /**
-     * @param {string} command
-     */
-    send(command) {
-        if (command === 'DOM.getDocument') {
-            return Promise.resolve({tree})
-        } else if (command === 'DOM.getAttributes') {
-            return Promise.resolve({attrs})
-        }
+const SRITagCollector = require('../../src/collectors/SRITagCollector.js')
 
-        throw new Error('Unexpected command called: ' + command)
+function getFakeCDPClient(tree, attrs) {
+    return {
+        /**
+         * @param {string} command
+         */
+        send(command, params) {
+            if (command === 'Page.enable' || command === 'DOM.enable') {
+                return Promise.resolve()
+            }
+            if (command === 'DOM.getDocument') {
+                return Promise.resolve(tree)
+            } else if (command === 'DOM.getAttributes') {
+                return Promise.resolve(attrs[params.nodeId])
+            }
+
+            throw new Error('Unexpected command called: ' + command)
+        }
     }
 }
 
 describe('Scraper tests', async function() {
+    var collector
     before(function() {
-        const collector = new SRITagCollector()
-        collector.init({(msg) => {}})
+        collector = new SRITagCollector()
+        const log = (msg) => {console.log(msg)}
+        collector.init({log})
     }),
 
-    it(collectorCase.name, async function() {
+    it('tests the correct extraction of SRI elements', async function() {
         // Arrange
         const tree = {
             "root": {
@@ -169,7 +178,7 @@ describe('Scraper tests', async function() {
                                                                     "children": [],
                                                                     "attributes": [
                                                                         "src",
-                                                                        "http://127.0.0.1:9616/assets/html/tmp3.html"
+                                                                        "http://127.0.0.1:9617/assets/html/tmp3.html"
                                                                     ],
                                                                     "frameId": "4CC58C65EEEE38967E288486D70BC447",
                                                                     "contentDocument": {
@@ -213,7 +222,7 @@ describe('Scraper tests', async function() {
                                                                                                 "children": [],
                                                                                                 "attributes": [
                                                                                                     "integrity",
-                                                                                                    "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN%",
+                                                                                                    "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                                                                                                     "crossorigin",
                                                                                                     "anonymous",
                                                                                                     "rel",
@@ -247,7 +256,7 @@ describe('Scraper tests', async function() {
                                                                                                 "children": [],
                                                                                                 "attributes": [
                                                                                                     "integrity",
-                                                                                                    "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT%",
+                                                                                                    "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                                                                                                     "crossorigin",
                                                                                                     "anonymous",
                                                                                                     "src",
@@ -262,8 +271,8 @@ describe('Scraper tests', async function() {
                                                                                 "frameId": "4CC58C65EEEE38967E288486D70BC447"
                                                                             }
                                                                         ],
-                                                                        "documentURL": "http://127.0.0.1:9616/assets/html/tmp3.html",
-                                                                        "baseURL": "http://127.0.0.1:9616/assets/html/tmp3.html",
+                                                                        "documentURL": "http://127.0.0.1:9617/assets/html/tmp3.html",
+                                                                        "baseURL": "http://127.0.0.1:9617/assets/html/tmp3.html",
                                                                         "xmlVersion": "",
                                                                         "compatibilityMode": "QuirksMode"
                                                                     }
@@ -353,7 +362,7 @@ describe('Scraper tests', async function() {
             "16": {
                 "attributes": [
                     "integrity",
-                    "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN%",
+                    "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     "crossorigin",
                     "anonymous",
                     "rel",
@@ -365,7 +374,7 @@ describe('Scraper tests', async function() {
             "18": {
                 "attributes": [
                     "integrity",
-                    "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT%",
+                    "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     "crossorigin",
                     "anonymous",
                     "src",
@@ -386,7 +395,7 @@ describe('Scraper tests', async function() {
             {
                 "element": "SCRIPT",
                 "attributes": {
-                    "src": "http://127.0.0.1:9615/assets/js/some_script.js"
+                    "src": "http://127.0.0.1:9615/assets/js/some_script.js",
                 }
             },
             {
@@ -396,37 +405,42 @@ describe('Scraper tests', async function() {
             {
                 "element": "SCRIPT",
                 "attributes": {
-                    "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT%",
-                    "crossorigin": "anonymous"
+                    "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
+                    "crossorigin": "anonymous",
+                    "src": "http://127.0.0.1:9615/assets/js/some_script.js"
                 }
             },
             {
                 "element": "LINK",
                 "attributes": {
-                    "integrity": "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN%",
-                    "crossorigin": "anonymous"
+                    "integrity": "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
+                    "crossorigin": "anonymous",
+                    "rel": "stylesheet",
+                    "href": "http://127.0.0.1:9615/assets/css/some_css.css"
                 }
             },
             {
                 "element": "LINK",
                 "attributes": {
-                    "rel": "stylesheet"
+                    "rel": "stylesheet",
+                    "href": "../css/some_css.css"
                 }
             },
             {
                 "element": "LINK",
                 "attributes": {
-                    "rel": "stylesheet"
+                    "rel": "stylesheet",
+                    "href": "http://127.0.0.1:9615/assets/css/some_css.css"
                 }
             }
         ]
-        const fakeCDPClient = getFakeCDPClient(collectorCase.tree, collectorCase.attrs)
+        const fakeCDPClient = getFakeCDPClient(tree, attrs)
         collector.addTarget({cdpClient: fakeCDPClient, type: 'page', url: 'http://example.com'});
 
         // Act
-        const result = await collector.getData()
+        const result = await collector.getData({})
 
         // Assert
-        assert.deepEquals(expectedResult, result)
+        assert.deepEqual(expectedResult, result)
     })
 })
