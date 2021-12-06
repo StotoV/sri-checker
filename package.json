@@ -5,7 +5,7 @@
     "main": "./src/index.js",
     "scripts": {
         "start": "./index.js",
-        "test": "mocha --recursive",
+        "test": "mocha --inline-diffs --full-trace --recursive",
         "docs": "jsdoc -c ./jsdoc.conf"
     },
     "bin": {

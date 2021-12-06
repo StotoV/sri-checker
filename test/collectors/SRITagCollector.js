@@ -441,6 +441,6 @@ describe('Scraper tests', async function() {
         const result = await collector.getData({})
 
         // Assert
-        assert.deepEqual(expectedResult, result)
+        assert.deepEqual(result, expectedResult)
     })
 })
