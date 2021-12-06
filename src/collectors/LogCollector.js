@@ -1,3 +1,5 @@
+const BaseCollector = require('./BaseCollector.js')
+
 class LogCollector {
     id() {
         return 'logs'
@@ -13,16 +15,16 @@ class LogCollector {
     }
 
     /**
-     * @param {{cdpClient: import('puppeteer').CDPSession, url: string, type: TargetCollector.TargetType}} targetInfo
+     * @param {{cdpClient: require('puppeteer').CDPSession, url: string, type: require('tracker-radar-collector').TargetCollector.TargetType}} targetInfo
      */
     addTarget({cdpClient, type}) {
         this._cdpClient = cdpClient
     }
 
     /**
-     * @returns {}
+     * @returns {LogData[]}
      */
-    async getData(options) {
+    async getData() {
         var logEntries = []
         this._cdpClient.on('Log.entryAdded', async ({entry}) => {
             logEntries.push(entry)
@@ -36,3 +38,13 @@ class LogCollector {
 }
 
 module.exports = LogCollector
+
+/**
+ * @typedef {object} LogData
+ *
+ * @property {string} source
+ * @property {string} level
+ * @property {string} text
+ * @property {string} url
+ * @property {string=} category
+ */
