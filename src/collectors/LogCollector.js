@@ -1,6 +1,6 @@
 class LogCollector {
     id() {
-        return 'consoleError'
+        return 'logs'
     }
 
     /**
