@@ -62,8 +62,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 attributes: {
                     src: 'http://127.0.0.1:9616/assets/js/some_script.js'
                 },
@@ -90,8 +91,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 element: 'LINK',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 attributes: {
                     rel: 'stylesheet',
                     href: 'http://127.0.0.1:9616/assets/css/some_css.css'
@@ -132,8 +134,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 attributes: {
                     integrity: "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     src: 'http://127.0.0.1:9616/assets/js/some_script.js'
@@ -168,8 +171,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 attributes: {
                     integrity: "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     rel: "stylesheet",
@@ -218,8 +222,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     crossorigin: "anonymous",
@@ -248,8 +253,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     crossorigin: "anonymous",
@@ -292,8 +298,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 attributes: {
                     integrity: "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     crossorigin: "use-credentials",
@@ -337,8 +344,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 attributes: {
                     integrity: "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     crossorigin: "use-credentials",
@@ -397,8 +405,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     crossorigin: "anonymous",
@@ -434,8 +443,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     crossorigin: "anonymous",
@@ -488,8 +498,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 attributes: {
                     integrity: "md5-zf2SihmB+NZWAJzQNUUV+Q==",
                     crossorigin: "anonymous",
@@ -525,8 +536,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 attributes: {
                     integrity: "md5-Dc4rWS40Cc9c/BMOnCSA6w==",
                     crossorigin: "anonymous",
@@ -572,8 +584,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 attributes: {
                     integrity: "zf2SihmB+NZWAJzQNUUV+Q==",
                     crossorigin: "anonymous",
@@ -609,8 +622,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 attributes: {
                     integrity: "Dc4rWS40Cc9c/BMOnCSA6w==",
                     crossorigin: "anonymous",
@@ -655,8 +669,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT sha512-1S9gT5BudArCBTfD251WLGI41DBGSO0NehUWEqvYdCwOEcr/FoGPvfVPOV5QxGhP8c3WstvgMFEwgPZgQUGyXg==",
                     crossorigin: "anonymous",
@@ -685,8 +700,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 attributes: {
                     integrity: "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN sha512-OG1/cGZoV5UCmfbuafASsYOiGvlncSsgzia/B4ZDcqPNpyvMOVxIoN5EkR5oFitSdCKf+DPgBW3FnDsh+0y9wg==",
                     crossorigin: "anonymous",
@@ -731,8 +747,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 attributes: {
                     integrity: "sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT sha512-1S9gT5BudArCBTfD251WLGI41DBGSO0NehUWEqvYdCwOEcr/FoGPvfVPOV5QxGhP8c3WstvgMFEwgPZgQUGyXg==",
                     crossorigin: "anonymous",
@@ -761,8 +778,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 attributes: {
                     integrity: "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN sha512-OG1/cGZoV5UCmfbuafASsYOiGvlncSsgzia/B4ZDcqPNpyvMOVxIoN5EkR5oFitSdCKf+DPgBW3FnDsh+0y9wg==",
                     crossorigin: "anonymous",
@@ -807,8 +825,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
+                document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_integrity_destination.html',
                 attributes: {
                     integrity: "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     crossorigin: "anonymous",
@@ -837,8 +856,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
+                document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_integrity_destination.html',
                 attributes: {
                     integrity: "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     crossorigin: "anonymous",
@@ -883,8 +903,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
                     integrity: "sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     crossorigin: "anonymous",
@@ -920,8 +941,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
                 element: "LINK",
-                origin: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
                     integrity: "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     crossorigin: "anonymous",
@@ -973,8 +995,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 attributes: {
                     src: 'http://127.0.0.1:9615/assets/js/some_script.js'
                 },
@@ -1001,8 +1024,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 element: 'LINK',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 attributes: {
                     rel: 'stylesheet',
                     href: 'http://127.0.0.1:9615/assets/css/some_css.css'
@@ -1043,8 +1067,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 attributes: {
                     integrity: 'sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT',
                     src: 'http://127.0.0.1:9615/assets/js/some_script.js'
@@ -1072,8 +1097,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 element: 'LINK',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 attributes: {
                     integrity: 'sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN',
                     rel: 'stylesheet',
@@ -1115,8 +1141,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 attributes: {
                     crossorigin: 'anonymous',
                     integrity: 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT',
@@ -1152,8 +1179,9 @@ describe('Scraper tests', function() {
                 ]
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 element: 'LINK',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 attributes: {
                     crossorigin: 'anonymous',
                     integrity: 'sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN',
@@ -1203,8 +1231,9 @@ describe('Scraper tests', function() {
         // Arrange
         const expectedResult = [
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 element: 'SCRIPT',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 attributes: {
                     crossorigin: 'anonymous',
                     integrity: 'sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT',
@@ -1233,8 +1262,9 @@ describe('Scraper tests', function() {
                 logs: []
             },
             {
+                target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 element: 'LINK',
-                origin: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
+                document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 attributes: {
                     crossorigin: 'anonymous',
                     integrity: 'sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN',
