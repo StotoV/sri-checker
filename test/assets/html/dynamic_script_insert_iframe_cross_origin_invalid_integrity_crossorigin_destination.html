@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Dynamic script insert in iframe with invalid integrity and valid cross origin destination</title>
+    </head>
+    <body>
+        <script>
+            var script = document.createElement('script')
+            script.setAttribute('src', 'http://127.0.0.1:9617/assets/js/some_script.js')
+            script.setAttribute('crossorigin', 'anonymous')
+            script.setAttribute('integrity', 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT')
+            document.body.appendChild(script)
+        </script>
+    </body>
+</html>
