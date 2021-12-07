@@ -5,13 +5,12 @@ const LogCollector = require('./collectors/LogCollector.js')
 
 const log = logger.child({module: 'scraper'})
 
-function getMatchingNetworkRequests(origin, tag, requests) {
+function getMatchingNetworkRequests(tag, requests) {
     var matchedNetworkRequests = []
-    log.verbose(origin)
 
     for (const request of requests) {
-        if ((tag.attributes.src && request.url === new URL(tag.attributes.src, origin).toString()) ||
-            (tag.attributes.href && request.url === new URL(tag.attributes.href, origin).toString())) {
+        if ((tag.attributes.src && request.url === new URL(tag.attributes.src, tag.document).toString()) ||
+            (tag.attributes.href && request.url === new URL(tag.attributes.href, tag.document).toString())) {
             matchedNetworkRequests.push(request)
         }
     }
@@ -19,16 +18,16 @@ function getMatchingNetworkRequests(origin, tag, requests) {
     return matchedNetworkRequests
 }
 
-function getMatchingLogs(origin, tag, logs) {
+function getMatchingLogs(tag, logs) {
     var matchedLogs = []
     for (const log of logs) {
         if (log.text.includes(tag.attributes.href) ||
             log.text.includes(tag.attributes.src) ||
-            (tag.attributes.href && log.text.includes(new URL(tag.attributes.href, origin).toString())) ||
-            (tag.attributes.src && log.text.includes(new URL(tag.attributes.src, origin).toString())) ||
+            (tag.attributes.href && log.text.includes(new URL(tag.attributes.href, tag.document).toString())) ||
+            (tag.attributes.src && log.text.includes(new URL(tag.attributes.src, tag.document).toString())) ||
 
-            (tag.attributes.src && log.url === new URL(tag.attributes.src, origin).toString()) ||
-            (tag.attributes.href && log.url === new URL(tag.attributes.href, origin).toString()) ||
+            (tag.attributes.src && log.url === new URL(tag.attributes.src, tag.document).toString()) ||
+            (tag.attributes.href && log.url === new URL(tag.attributes.href, tag.document).toString()) ||
 
             log.text.includes(tag.attributes.integrity)) {
             matchedLogs.push(log)
@@ -59,8 +58,8 @@ async function scrape(target) {
     var out = []
     for (const tag of collectedData.data.SRITag) {
         tag['target'] = target
-        tag['requests'] = getMatchingNetworkRequests(target, tag, collectedData.data.requests)
-        tag['logs'] = getMatchingLogs(target, tag, collectedData.data.logs)
+        tag['requests'] = getMatchingNetworkRequests(tag, collectedData.data.requests)
+        tag['logs'] = getMatchingLogs(tag, collectedData.data.logs)
 
         out.push(tag)
     }
