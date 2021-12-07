@@ -1302,4 +1302,122 @@ describe('Scraper tests', function() {
         // Assert
         assert.deepEqual(result, expectedResult)
     }).timeout(60000)
+
+    it('tests dynamic script insert with invalid integrity and crossorigin', async function() {
+        // Arrange
+        const expectedResult = [
+            {
+                target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                element: 'SCRIPT',
+                document: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                attributes: {
+                    src: 'http://127.0.0.1:9616/assets/js/some_script.js',
+                    crossorigin: 'anonymous',
+                    integrity: 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
+                },
+                requests: [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/js/some_script.js",
+                        "method": "GET",
+                        "type": "Script",
+                        "status": 200,
+                        "size": 316,
+                        "redirectedFrom": undefined,
+                        "redirectedTo": undefined,
+                        "failureReason": undefined,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "b5ce71442f5678d8e54851c832579318c2d139b1582aa7b5bdd6c482f1e26121",
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html"
+                        ]
+                    }
+                ],
+                logs: [
+                    {
+                        "source": "security",
+                        "level": "error",
+                        "text": "Failed to find a valid digest in the 'integrity' attribute for resource 'http://127.0.0.1:9616/assets/js/some_script.js' with computed SHA-384 integrity 'OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'. The resource has been blocked.",
+                        "url": "http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html"
+                    }
+                ]
+            },
+            {
+                target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                element: 'SCRIPT',
+                document: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                attributes: {},
+                requests: [],
+                logs: []
+            }
+        ]
+
+        // Act
+        var result = await scrape(origin+'/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html')
+        result = stripFluidFields(result)
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }).timeout(60000),
+
+    it('tests dynamic script insert in iframe with invalid integrity and crossorigin', async function() {
+        // Arrange
+        const expectedResult = [
+            {
+                target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html',
+                element: 'SCRIPT',
+                document: 'http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
+                attributes: {
+                    src: 'http://127.0.0.1:9617/assets/js/some_script.js',
+                    crossorigin: 'anonymous',
+                    integrity: 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
+                },
+                requests: [
+                    {
+                        "url": "http://127.0.0.1:9617/assets/js/some_script.js",
+                        "method": "GET",
+                        "type": "Script",
+                        "status": 200,
+                        "size": 316,
+                        "redirectedFrom": undefined,
+                        "redirectedTo": undefined,
+                        "failureReason": undefined,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "b5ce71442f5678d8e54851c832579318c2d139b1582aa7b5bdd6c482f1e26121",
+                        "initiators": [
+                            "http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html"
+                        ]
+                    }
+                ],
+                logs: [
+                    {
+                        "source": "security",
+                        "level": "error",
+                        "text": "Failed to find a valid digest in the 'integrity' attribute for resource 'http://127.0.0.1:9617/assets/js/some_script.js' with computed SHA-384 integrity 'OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'. The resource has been blocked.",
+                        "url": "http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html"
+                    }
+                ]
+            },
+            {
+                target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html',
+                element: 'SCRIPT',
+                document: 'http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
+                attributes: {},
+                requests: [],
+                logs: []
+            }
+        ]
+
+        // Act
+        var result = await scrape(origin+'/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html')
+        result = stripFluidFields(result)
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }).timeout(60000)
 })
