@@ -30,18 +30,20 @@ class SRITagCollector {
 
         const nodeTree = await this._cdpClient.send('DOM.getDocument', {depth: -1, pierce: true})
         var nodes = []
-        var treeTraverseQueue = [nodeTree.root]
-        for (var node; node = treeTraverseQueue.pop();) {
-            if (node.nodeName == 'SCRIPT' ||
-                node.nodeName == 'LINK') {
-                nodes.push({element: node.nodeName, nodeId: node.nodeId})
+        var treeTraverseQueue = [{document: nodeTree.root.documentURL, node: nodeTree.root}]
+        for (var current; current = treeTraverseQueue.pop();) {
+            if (current.node.nodeName == 'SCRIPT' ||
+                current.node.nodeName == 'LINK') {
+                nodes.push({element: current.node.nodeName, nodeId: current.node.nodeId, document: current.document})
             }
 
-            if ('children' in node) {
-                treeTraverseQueue = treeTraverseQueue.concat(node.children)
+            if ('children' in current.node) {
+                for (const child of current.node.children) {
+                    treeTraverseQueue.push({document: current.document, node: child})
+                }
             }
-            if ('contentDocument' in node) {
-                treeTraverseQueue = treeTraverseQueue.concat(node.contentDocument)
+            if ('contentDocument' in current.node) {
+                treeTraverseQueue.push({document: current.node.contentDocument.documentURL, node: current.node.contentDocument})
             }
         }
 
@@ -55,6 +57,7 @@ class SRITagCollector {
 
             nodeAttrs.push({
                 element: node.element,
+                document: node.document,
                 attributes: attrs
             })
         }
@@ -68,8 +71,9 @@ module.exports = SRITagCollector
 /**
  * @typedef {object} SRITagData
  *
- * @property {string} element
- * @property {TagAttributes[]} attributes
+ * @property {string}           element         Element type of the tag (STRING or LINK)
+ * @property {TagAttributes[]}  attributes      List of attributes of the tag
+ * @property {string}           document        Document URL of that the tag was found in
  */
 
 /**
