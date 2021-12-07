@@ -23,7 +23,7 @@ logger.debug('Logging initialized')
 // END CONFIG logger
 
 const scrape = require('./scrape.js')
-const usage = require('./tag_usage.js')
+const label = require('./label.js')
 const fs = require('fs');
 
 /**
@@ -33,15 +33,17 @@ const fs = require('fs');
  * @param    {string}    outPath    The location where the results will be written. Must be a JSON file
  *
  * @TODO             Add input validation on params
+ * @TODO             Create destination dir if it does not exist
  */
 async function checkURL (URL, outPath) {
     logger.verbose('checkURL called with URL: ' + URL + ' and outPath: ' + outPath)
 
-    var out = JSON.stringify(await scrape(URL))
-    await fs.writeFileSync(outPath + 'scrape.json', out);
+    const scrapeResult = await scrape(URL)
+    // await fs.writeFileSync(outPath + 'scrape.json', out);
 
-    // out = JSON.stringify(await usage(out))
-    // await fs.writeFileSync(outPath + 'usage.json', out);
+    const labelResult = await label(scrapeResult)
+    logger.verbose(JSON.stringify(labelResult, null, 2))
+    // await fs.writeFileSync(outPath + 'label.json', out);
 
     logger.verbose('Done with all tests for URL: ' + URL)
     process.exit(0)
@@ -49,5 +51,6 @@ async function checkURL (URL, outPath) {
 
 module.exports = {
     checkURL: checkURL,
-    tagUsage: usage
+    scrape: scrape,
+    label: label,
 }

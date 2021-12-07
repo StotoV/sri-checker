@@ -1,4 +1,3 @@
-const url = require('url')
 const { crawler, RequestCollector} = require('tracker-radar-collector');
 
 const SRITagCollector = require('./collectors/SRITagCollector.js')
@@ -8,11 +7,11 @@ const log = logger.child({module: 'scraper'})
 
 function getMatchingNetworkRequests(origin, tag, requests) {
     var matchedNetworkRequests = []
+    log.verbose(origin)
+
     for (const request of requests) {
-        if (request.url === tag.attributes.href ||
-            request.url === tag.attributes.src||
-            request.url === origin + tag.attributes.href ||
-            request.url === origin + tag.attributes.src) {
+        if ((tag.attributes.src && request.url === new URL(tag.attributes.src, origin).toString()) ||
+            (tag.attributes.href && request.url === new URL(tag.attributes.href, origin).toString())) {
             matchedNetworkRequests.push(request)
         }
     }
@@ -25,13 +24,11 @@ function getMatchingLogs(origin, tag, logs) {
     for (const log of logs) {
         if (log.text.includes(tag.attributes.href) ||
             log.text.includes(tag.attributes.src) ||
-            log.text.includes(origin + tag.attributes.href) ||
-            log.text.includes(origin + tag.attributes.src) ||
+            (tag.attributes.href && log.text.includes(new URL(tag.attributes.href, origin).toString())) ||
+            (tag.attributes.src && log.text.includes(new URL(tag.attributes.src, origin).toString())) ||
 
-            log.url === tag.attributes.href ||
-            log.url === tag.attributes.src ||
-            log.url === origin + tag.attributes.href ||
-            log.url === origin + tag.attributes.src ||
+            (tag.attributes.src && log.url === new URL(tag.attributes.src, origin).toString()) ||
+            (tag.attributes.href && log.url === new URL(tag.attributes.href, origin).toString()) ||
 
             log.text.includes(tag.attributes.integrity)) {
             matchedLogs.push(log)
@@ -44,15 +41,15 @@ function getMatchingLogs(origin, tag, logs) {
 /**
  * Scrapes the given URL on SRI relevant tags
  *
- * @param       {string}    URL         The URL that will be scraped
- * @returns     {ScrapeResult[]}  The scraped elements in JSON format
+ * @param       {string}    target      The URL that will be scraped
+ * @returns     {ScrapeResult[]}        The scraped elements in JSON format
  *
  */
-async function scrape(URL) {
-    log.verbose('Starting scraping ' + URL)
+async function scrape(target) {
+    log.verbose('Starting scraping ' + target)
 
     const collectors = [new RequestCollector(), new LogCollector(), new SRITagCollector()]
-    const collectedData = await crawler(new url.URL(URL), {
+    const collectedData = await crawler(new URL(target), {
         collectors: collectors,
         log: (msg) => {log.verbose('[Crawler] ' + msg)},
         runInEveryFrame: true,
@@ -61,13 +58,15 @@ async function scrape(URL) {
 
     var out = []
     for (const tag of collectedData.data.SRITag) {
-        tag['requests'] = getMatchingNetworkRequests(URL, tag, collectedData.data.requests)
-        tag['logs'] = getMatchingLogs(URL, tag, collectedData.data.logs)
+        tag['origin'] = target
+        tag['requests'] = getMatchingNetworkRequests(target, tag, collectedData.data.requests)
+        tag['logs'] = getMatchingLogs(target, tag, collectedData.data.logs)
 
         out.push(tag)
     }
 
-    log.verbose('Done scraping ' + URL)
+    log.verbose(JSON.stringify(collectedData, null, 2))
+    log.verbose('Done scraping ' + target)
     return out
 }
 
@@ -77,6 +76,7 @@ module.exports = scrape
  * @typedef {object} ScrapeResult
  *
  * @property {string} element
+ * @property {string} origin
  * @property {TagAttributes[]} attributes
  * @property {RequestData[]} requests
  * @property {LogData[]} logs
