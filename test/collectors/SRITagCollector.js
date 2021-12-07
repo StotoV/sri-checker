@@ -391,16 +391,19 @@ describe('SRITagCollector tests', async function() {
         const expectedResult = [
             {
                 "element": "SCRIPT",
+                "document": "http://127.0.0.1:9615/assets/html/tmp.html",
                 "attributes": {
                     "src": "http://127.0.0.1:9615/assets/js/some_script.js",
                 }
             },
             {
                 "element": "SCRIPT",
+                "document": "http://127.0.0.1:9616/assets/html/tmp2.html",
                 "attributes": {}
             },
             {
                 "element": "SCRIPT",
+                "document": "http://127.0.0.1:9617/assets/html/tmp3.html",
                 "attributes": {
                     "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
                     "crossorigin": "anonymous",
@@ -409,6 +412,7 @@ describe('SRITagCollector tests', async function() {
             },
             {
                 "element": "LINK",
+                "document": "http://127.0.0.1:9617/assets/html/tmp3.html",
                 "attributes": {
                     "integrity": "sha384-Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
                     "crossorigin": "anonymous",
@@ -418,6 +422,7 @@ describe('SRITagCollector tests', async function() {
             },
             {
                 "element": "LINK",
+                "document": "http://127.0.0.1:9616/assets/html/tmp2.html",
                 "attributes": {
                     "rel": "stylesheet",
                     "href": "../css/some_css.css"
@@ -425,6 +430,7 @@ describe('SRITagCollector tests', async function() {
             },
             {
                 "element": "LINK",
+                "document": "http://127.0.0.1:9615/assets/html/tmp.html",
                 "attributes": {
                     "rel": "stylesheet",
                     "href": "http://127.0.0.1:9615/assets/css/some_css.css"

@@ -58,7 +58,7 @@ async function scrape(target) {
 
     var out = []
     for (const tag of collectedData.data.SRITag) {
-        tag['origin'] = target
+        tag['target'] = target
         tag['requests'] = getMatchingNetworkRequests(target, tag, collectedData.data.requests)
         tag['logs'] = getMatchingLogs(target, tag, collectedData.data.logs)
 
@@ -75,11 +75,12 @@ module.exports = scrape
 /**
  * @typedef {object} ScrapeResult
  *
- * @property {string} element
- * @property {string} origin
- * @property {TagAttributes[]} attributes
- * @property {RequestData[]} requests
- * @property {LogData[]} logs
+ * @property {string}           target
+ * @property {string}           element         Element type of the tag (STRING or LINK)
+ * @property {TagAttributes[]}  attributes      List of attributes of the tag
+ * @property {string}           document        Document URL of that the tag was found in
+ * @property {RequestData[]}    requests
+ * @property {LogData[]}        logs
  */
 
 /**
