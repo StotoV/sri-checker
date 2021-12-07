@@ -19,7 +19,7 @@ function getFakeCDPClient(tree, attrs) {
     }
 }
 
-describe('Scraper tests', async function() {
+describe('SRITagCollector tests', async function() {
     var collector
     before(function() {
         collector = new SRITagCollector()
