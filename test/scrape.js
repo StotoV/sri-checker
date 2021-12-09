@@ -493,6 +493,114 @@ describe('Scraper tests', function() {
 
     }).timeout(60000),
 
+    it('tests valid cross origin request with invalid integrity and invalid crossorigin', async function() {
+        // Arrange
+        const expectedResult = [
+            {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                element: 'SCRIPT',
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                attributes: {
+                    integrity: "sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
+                    crossorigin: "use-credentials",
+                    src: 'http://127.0.0.1:9616/assets/js/some_script.js'
+                },
+                requests: [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/js/some_script.js",
+                        "method": "GET",
+                        "type": "Script",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": null,
+                        "failureReason": "net::ERR_FAILED",
+                        "redirectedFrom": undefined,
+                        "redirectedTo": undefined,
+                        "remoteIPAddress": undefined,
+                        "size": undefined,
+                        "status": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
+                        ]
+                    }
+                ],
+                logs: [
+                    {
+                        "source": "javascript",
+                        "level": "error",
+                        "text": "Access to script at 'http://127.0.0.1:9616/assets/js/some_script.js' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
+                        "category": "cors",
+                        "url": "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
+                    },
+                    {
+                        "source": "network",
+                        "level": "error",
+                        "text": "Failed to load resource: net::ERR_FAILED",
+                        "category": "cors",
+                        "url": "http://127.0.0.1:9616/assets/js/some_script.js"
+                    }
+                ]
+            },
+            {
+                target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                element: "LINK",
+                document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                attributes: {
+                    integrity: "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
+                    crossorigin: "use-credentials",
+                    rel: "stylesheet",
+                    href: "http://127.0.0.1:9616/assets/css/some_css.css"
+                },
+                requests: [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/css/some_css.css",
+                        "method": "GET",
+                        "type": "Stylesheet",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": null,
+                        "failureReason": "net::ERR_FAILED",
+                        "redirectedFrom": undefined,
+                        "redirectedTo": undefined,
+                        "remoteIPAddress": undefined,
+                        "size": undefined,
+                        "status": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
+                        ]
+                    }
+                ],
+                logs: [
+                    {
+                        "source": "javascript",
+                        "level": "error",
+                        "text": "Access to CSS stylesheet at 'http://127.0.0.1:9616/assets/css/some_css.css' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
+                        "category": "cors",
+                        "url": "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
+                    },
+                    {
+                        "source": "network",
+                        "level": "error",
+                        "text": "Failed to load resource: net::ERR_FAILED",
+                        "category": "cors",
+                        "url": "http://127.0.0.1:9616/assets/css/some_css.css"
+                    }
+                ]
+            }
+        ]
+
+        // Act
+        var result = await scrape(origin+'/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html')
+        result = stripFluidFields(result)
+
+        // Assert
+        assert.deepStrictEqual(result, expectedResult)
+
+
+    }).timeout(60000),
+
     // @TODO: Mismatch between script and link
     it('tests valid cross origin request with non supported integrity and valid crossorigin', async function() {
         // Arrange
