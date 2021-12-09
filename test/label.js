@@ -12,28 +12,30 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
-                attributes: {}
+                target: 'https://example.com',
+                attributes: {},
+                logs: []
             },
             {
-                origin: 'http://example.com',
-                attributes: {}
+                target: 'http://example.com',
+                attributes: {},
+                logs: []
             }
         ]
         const expectedResult = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 pageUsesHttps: true
             },
             {
-                origin: 'http://example.com',
+                target: 'http://example.com',
                 pageUsesHttps: false
             },
         ]
 
         // Act
         let result = label(input)
-        onlyKeepRelevantFields(result, ['origin', 'pageUsesHttps'])
+        onlyKeepRelevantFields(result, ['target', 'pageUsesHttps'])
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -43,62 +45,67 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
-                attributes: {}
+                attributes: {},
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'LINK',
                 attributes: {
                     href: 'https://example.com/some_css.css'
-                }
+                },
+                logs: []
             }
         ]
         const expectedResult = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 resource: 'https://example.com/some_script.js'
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 resource: undefined
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 resource: 'https://example.com/some_css.css'
             }
         ]
 
         // Act
         let result = label(input)
-        onlyKeepRelevantFields(result, ['origin', 'resource'])
+        onlyKeepRelevantFields(result, ['target', 'resource'])
 
         // Assert
         assert.deepEqual(result, expectedResult)
     }),
 
-    it('tests labeler augments relative resource with origin', function() {
+    it('tests labeler augments relative resource with target', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: '/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
-                attributes: {}
+                attributes: {},
+                logs: []
             }
         ]
         const expectedResult = [
@@ -122,30 +129,34 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'http://example.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: '//example.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
-                attributes: {}
+                attributes: {},
+                logs: []
             },
         ]
         const expectedResult = [
@@ -175,46 +186,52 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'http://example.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: '//example2.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: '//example2.com/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example.com:8080/some_script.js'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://cdn.example.com/some_script.js'
-                }
+                },
+                logs: []
             },
         ]
         let expectedResult = Array(6)
@@ -236,26 +253,30 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     integrity: ''
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     integrity: 'sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     integrity: 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
-                attributes: {}
+                target: 'https://example.com',
+                attributes: {},
+                logs: []
             }
         ]
         let expectedResult = [
@@ -285,32 +306,37 @@ describe('Labeler tests', function() {
         // Arrange
         const input = [
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     crossorigin: ''
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     crossorigin: 'anonymous'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     crossorigin: 'use-credentials'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
+                target: 'https://example.com',
                 attributes: {
                     crossorigin: 'malformed'
-                }
+                },
+                logs: []
             },
             {
-                origin: 'https://example.com',
-                attributes: {}
+                target: 'https://example.com',
+                attributes: {},
+                logs: []
             }
         ]
         let expectedResult = [
@@ -334,6 +360,154 @@ describe('Labeler tests', function() {
         // Act
         const result = label(input)
         onlyKeepRelevantFields(result, ['hasCrossorigin'])
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }),
+
+    it('tests labeler handles log message correctly', function() {
+        // Arrange
+        const input = [
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: ''
+                },
+                logs: [
+                    {
+                        text: "Subresource Integrity: The resource 'https://example2.com/assets/js/some_script.js' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not. The resource has been blocked because the integrity cannot be enforced."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: ''
+                },
+                logs: [
+                    {
+                        text: "Access to script at 'https://example2.com/assets/js/some_script.js' from origin 'https://example.com' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'LINK',
+                attributes: {
+                    href: 'https://example2.com/assets/css/some_css.css',
+                    integrity: ''
+                },
+                logs: [
+                    {
+                        text: "Access to CSS stylesheet at 'https://example2.com/assets/css/some_css.css' from origin 'https://example.com' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: 'sha256-invalidhash',
+                    crossorigin: 'anonymous'
+                },
+                logs: [
+                    {
+                        text: "Failed to find a valid digest in the 'integrity' attribute for resource 'https://example2.com/assets/js/some_script.js' with computed SHA-256 integrity 'sha256-invalidhash'. The resource has been blocked."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: 'md5-invalidhash',
+                    crossorigin: 'anonymous'
+                },
+                logs: [
+                    {
+                        text: "Error parsing 'integrity' attribute ('md5-invalidhash'). The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: 'invalidintegrity',
+                    crossorigin: 'anonymous'
+                },
+                logs: [
+                    {
+                        text: "Error parsing 'integrity' attribute ('invalidintegrity'). The hash algorithm must be one of 'sha256', 'sha384', or 'sha512', followed by a '-' character."
+                    }
+                ]
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    integrity: '',
+                    crossorigin: 'anonymous'
+                },
+                logs: []
+            },
+        ]
+        let expectedResult = [
+            {
+                hasValidIntegrity: undefined,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: undefined,
+                hasValidCrossorigin: false
+            },
+            {
+                hasValidIntegrity: undefined,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: undefined,
+                hasValidCrossorigin: false
+            },
+            {
+                hasValidIntegrity: undefined,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: undefined,
+                hasValidCrossorigin: false
+            },
+            {
+                hasValidIntegrity: false,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: false,
+                hasValidCrossorigin: true
+            },
+            {
+                hasValidIntegrity: false,
+                usesUnsupportedHash: true,
+                hasMalformedIntegrity: false,
+                hasValidCrossorigin: true
+            },
+            {
+                hasValidIntegrity: false,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: true,
+                hasValidCrossorigin: true
+            },
+            {
+                hasValidIntegrity: true,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: false,
+                hasValidCrossorigin: true
+            }
+        ]
+
+        // Act
+        const result = label(input)
+        onlyKeepRelevantFields(result, ['hasValidIntegrity', 'usesUnsupportedHash', 'hasMalformedIntegrity', 'hasValidCrossorigin'])
 
         // Assert
         assert.deepEqual(result, expectedResult)
