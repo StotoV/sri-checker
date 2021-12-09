@@ -64,7 +64,6 @@ async function scrape(target) {
         out.push(tag)
     }
 
-    log.verbose(JSON.stringify(collectedData, null, 2))
     log.verbose('Done scraping ' + target)
     return out
 }
