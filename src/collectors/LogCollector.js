@@ -32,7 +32,6 @@ class LogCollector {
 
         await this._cdpClient.send('Log.enable')
 
-        this._log(JSON.stringify(logEntries, null, 2))
         return logEntries
     }
 }

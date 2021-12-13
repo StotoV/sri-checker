@@ -41,7 +41,7 @@ function getMatchingLogs(tag, logs) {
  * Scrapes the given URL on SRI relevant tags
  *
  * @param       {string}    target      The URL that will be scraped
- * @returns     {ScrapeResult[]}        The scraped elements in JSON format
+ * @returns     {ScraperOutput}        The scraped elements in JSON format
  *
  */
 async function scrape(target) {
@@ -55,13 +55,26 @@ async function scrape(target) {
         executablePath: '/usr/bin/chromium' // To be removed if at all possible
     })
 
-    var out = []
+    var tags = []
+    var unmatchedNetworkRequests = [...collectedData.data.requests]
+    var unmatchedLogs = [...collectedData.data.logs]
     for (const tag of collectedData.data.SRITag) {
         tag['target'] = target
         tag['requests'] = getMatchingNetworkRequests(tag, collectedData.data.requests)
         tag['logs'] = getMatchingLogs(tag, collectedData.data.logs)
 
-        out.push(tag)
+        unmatchedNetworkRequests = unmatchedNetworkRequests.filter(request => {return !tag['requests'].includes(request)})
+        unmatchedLogs = unmatchedLogs.filter(logEntry => {return !tag['logs'].includes(logEntry)})
+
+        tags.push(tag)
+    }
+
+    const out = {
+        tags: tags,
+        unmatched: {
+            requests: unmatchedNetworkRequests,
+            logs: unmatchedLogs
+        }
     }
 
     log.verbose('Done scraping ' + target)
@@ -69,6 +82,13 @@ async function scrape(target) {
 }
 
 module.exports = scrape
+
+/**
+ * @typedef {object} ScraperOutput
+ *
+ * @property {ScrapeResult[]}                               tags
+ * @property {{requests: RequestData[], logs: LogData[]}}   unmatched
+ */
 
 /**
  * @typedef {object} ScrapeResult
