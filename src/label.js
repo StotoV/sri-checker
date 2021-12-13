@@ -43,46 +43,46 @@ function label(data) {
         labelData.usesUnsupportedHash = false
         labelData.hasMalformedIntegrity = false
         labelData.hasValidCrossorigin = true
-        loop:
         for (const message of result.logs) {
-            switch (message.text) {
-                case `Subresource Integrity: The resource '${labelData.resource}' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not. The resource has been blocked because the integrity cannot be enforced.`:
-                    labelData.hasValidIntegrity = undefined
-                    labelData.usesUnsupportedHash = false
-                    labelData.hasMalformedIntegrity = undefined
-                    labelData.hasValidCrossorigin = false
-                    break loop
 
-                case `Access to script at '${labelData.resource}' from origin '${new URL(labelData.target).origin}' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.`:
-                case `Access to CSS stylesheet at '${labelData.resource}' from origin '${new URL(labelData.target).origin}' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.`:
-                    labelData.hasValidIntegrity = undefined
-                    labelData.usesUnsupportedHash = false
-                    labelData.hasMalformedIntegrity = undefined
-                    labelData.hasValidCrossorigin = false
-                    break loop
+            if (RegExp("^Subresource Integrity: The resource '.*' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not\. The resource has been blocked because the integrity cannot be enforced\.$").test(message.text)) {
+                labelData.hasValidIntegrity = undefined
+                labelData.usesUnsupportedHash = false
+                labelData.hasMalformedIntegrity = undefined
+                labelData.hasValidCrossorigin = false
+                break
+            }
 
-                case `Failed to find a valid digest in the 'integrity' attribute for resource '${labelData.resource}' with computed SHA-256 integrity '${result.attributes.integrity}'. The resource has been blocked.`:
-                case `Failed to find a valid digest in the 'integrity' attribute for resource '${labelData.resource}' with computed SHA-384 integrity '${result.attributes.integrity}'. The resource has been blocked.`:
-                case `Failed to find a valid digest in the 'integrity' attribute for resource '${labelData.resource}' with computed SHA-512 integrity '${result.attributes.integrity}'. The resource has been blocked.`:
-                    labelData.hasValidIntegrity = false
-                    labelData.usesUnsupportedHash = false
-                    labelData.hasMalformedIntegrity = false
-                    labelData.hasValidCrossorigin = true
-                    break loop
+            else if (RegExp("^Access to (script|CSS stylesheet){1} at '.*' from origin '.*' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '\\*' when the request's credentials mode is 'include'\.$").test(message.text)) {
+                labelData.hasValidIntegrity = undefined
+                labelData.usesUnsupportedHash = false
+                labelData.hasMalformedIntegrity = undefined
+                labelData.hasValidCrossorigin = false
+                break
+            }
+                
+            else if (RegExp("^Failed to find a valid digest in the 'integrity' attribute for resource '.*' with computed SHA-(256|384|512){1} integrity '.*'\. The resource has been blocked\.$").test(message.text)) {
+                labelData.hasValidIntegrity = false
+                labelData.usesUnsupportedHash = false
+                labelData.hasMalformedIntegrity = false
+                labelData.hasValidCrossorigin = true
+                break
+            }
 
-                case `Error parsing 'integrity' attribute ('${result.attributes.integrity}'). The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'.`:
-                    labelData.hasValidIntegrity = false
-                    labelData.usesUnsupportedHash = true
-                    labelData.hasMalformedIntegrity = false
-                    labelData.hasValidCrossorigin = true
-                    break loop
+            else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'\.$").test(message.text)) {
+                labelData.hasValidIntegrity = false
+                labelData.usesUnsupportedHash = true
+                labelData.hasMalformedIntegrity = false
+                labelData.hasValidCrossorigin = true
+                break
+            }
 
-                case `Error parsing 'integrity' attribute ('${result.attributes.integrity}'). The hash algorithm must be one of 'sha256', 'sha384', or 'sha512', followed by a '-' character.`:
-                    labelData.hasValidIntegrity = false
-                    labelData.usesUnsupportedHash = false
-                    labelData.hasMalformedIntegrity = true
-                    labelData.hasValidCrossorigin = true
-                    break loop
+            else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The hash algorithm must be one of 'sha256', 'sha384', or 'sha512', followed by a '-' character\.$").test(message.text)) {
+                labelData.hasValidIntegrity = false
+                labelData.usesUnsupportedHash = false
+                labelData.hasMalformedIntegrity = true
+                labelData.hasValidCrossorigin = true
+                break
             }
         }
 

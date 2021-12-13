@@ -417,7 +417,7 @@ describe('Labeler tests', function() {
                 },
                 logs: [
                     {
-                        text: "Failed to find a valid digest in the 'integrity' attribute for resource 'https://example2.com/assets/js/some_script.js' with computed SHA-256 integrity 'sha256-invalidhash'. The resource has been blocked."
+                        text: "Failed to find a valid digest in the 'integrity' attribute for resource 'https://example2.com/assets/js/some_script.js' with computed SHA-256 integrity 'invalidhash'. The resource has been blocked."
                     }
                 ]
             },
