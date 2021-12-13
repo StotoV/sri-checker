@@ -1633,7 +1633,7 @@ describe('Scraper tests', function() {
 
         // Act
         var result = await scrape(origin+'/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result)
+        result = stripFluidFieldsOfTag(result.tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)

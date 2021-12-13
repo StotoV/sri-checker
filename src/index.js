@@ -58,7 +58,7 @@ async function checkURL (target, outPath) {
     const scrapeResult = await scrape(target)
     await fs.writeFileSync(outPath + '/scrape.json', JSON.stringify(scrapeResult, null, 2));
 
-    const labelResult = await label(scrapeResult)
+    const labelResult = await label(scrapeResult.tags)
     await fs.writeFileSync(outPath + '/label.json', JSON.stringify(labelResult, null, 2));
 
     logger.verbose('Done with all tests for URL: ' + target)

@@ -5,7 +5,7 @@
     "main": "./src/index.js",
     "scripts": {
         "start": "./index.js",
-        "test": "nyc --reporter=text mocha --inline-diffs --full-trace --recursive",
+        "test": "nyc --reporter=text mocha --inline-diffs --full-trace --recursive --parallel",
         "docs": "jsdoc -c ./jsdoc.conf"
     },
     "bin": {
