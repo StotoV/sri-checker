@@ -345,13 +345,6 @@ describe('Scraper tests', function() {
                         "text": "Access to script at 'http://127.0.0.1:9616/assets/js/some_script.js' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
                         "category": "cors",
                         "url": "http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html"
-                    },
-                    {
-                        "source": "network",
-                        "level": "error",
-                        "text": "Failed to load resource: net::ERR_FAILED",
-                        "category": "cors",
-                        "url": "http://127.0.0.1:9616/assets/js/some_script.js"
                     }
                 ]
             },
@@ -392,13 +385,6 @@ describe('Scraper tests', function() {
                         "text": "Access to CSS stylesheet at 'http://127.0.0.1:9616/assets/css/some_css.css' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
                         "category": "cors",
                         "url": "http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html"
-                    },
-                    {
-                        "source": "network",
-                        "level": "error",
-                        "text": "Failed to load resource: net::ERR_FAILED",
-                        "category": "cors",
-                        "url": "http://127.0.0.1:9616/assets/css/some_css.css"
                     }
                 ]
             }
@@ -544,13 +530,6 @@ describe('Scraper tests', function() {
                         "text": "Access to script at 'http://127.0.0.1:9616/assets/js/some_script.js' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
                         "category": "cors",
                         "url": "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
-                    },
-                    {
-                        "source": "network",
-                        "level": "error",
-                        "text": "Failed to load resource: net::ERR_FAILED",
-                        "category": "cors",
-                        "url": "http://127.0.0.1:9616/assets/js/some_script.js"
                     }
                 ]
             },
@@ -591,13 +570,6 @@ describe('Scraper tests', function() {
                         "text": "Access to CSS stylesheet at 'http://127.0.0.1:9616/assets/css/some_css.css' from origin 'http://127.0.0.1:9615' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.",
                         "category": "cors",
                         "url": "http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html"
-                    },
-                    {
-                        "source": "network",
-                        "level": "error",
-                        "text": "Failed to load resource: net::ERR_FAILED",
-                        "category": "cors",
-                        "url": "http://127.0.0.1:9616/assets/css/some_css.css"
                     }
                 ]
             }
