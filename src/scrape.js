@@ -29,7 +29,7 @@ function getMatchingLogs(tag, logs) {
             (tag.attributes.src && log.url === new URL(tag.attributes.src, tag.document).toString()) ||
             (tag.attributes.href && log.url === new URL(tag.attributes.href, tag.document).toString()) ||
 
-            (!!tag.attributes.integirty && log.text.includes(tag.attributes.integrity))) {
+            (!!tag.attributes.integrity && log.text.includes(tag.attributes.integrity))) {
             matchedLogs.push(log)
         }
     }
@@ -77,8 +77,6 @@ async function scrape(target) {
         }
     }
 
-    const replacer = (key, value) => typeof value === 'undefined' ? null : value
-    log.verbose(JSON.stringify(out, replacer, 2))
     log.verbose('Done scraping ' + target)
     return out
 }
