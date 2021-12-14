@@ -459,6 +459,27 @@ describe('Labeler tests', function() {
                 },
                 logs: []
             },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js'
+                },
+                logs: []
+            },
+            {
+                target: 'https://example.com',
+                element: 'SCRIPT',
+                attributes: {
+                    src: 'https://example2.com/assets/js/some_script.js',
+                    crossorigin: 'use-credentials'
+                },
+                logs: [
+                    {
+                        text: "Access to script at 'https://example2.com/assets/js/some_script.js' from origin 'https://example.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
+                    }
+                ]
+            }
         ]
         let expectedResult = [
             {
@@ -502,6 +523,18 @@ describe('Labeler tests', function() {
                 usesUnsupportedHash: false,
                 hasMalformedIntegrity: false,
                 hasValidCrossorigin: true
+            },
+            {
+                hasValidIntegrity: undefined,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: false,
+                hasValidCrossorigin: undefined
+            },
+            {
+                hasValidIntegrity: undefined,
+                usesUnsupportedHash: false,
+                hasMalformedIntegrity: undefined,
+                hasValidCrossorigin: false
             }
         ]
 
