@@ -14,15 +14,13 @@ function label(data) {
         labelData.target = result.target
         labelData.pageUsesHttps = new URL(labelData.target).protocol == 'https:'
         
+        labelData.resource = undefined
         switch (result.element) {
             case 'SCRIPT':
                 labelData.resource = result.attributes.src
                 break
             case 'LINK':
                 labelData.resource = result.attributes.href
-                break
-            default:
-                labelData.resource = undefined
                 break
         }
 
@@ -39,10 +37,10 @@ function label(data) {
         labelData.hasIntegrity = 'integrity' in result.attributes
         labelData.hasCrossorigin = 'crossorigin' in result.attributes
 
-        labelData.hasValidIntegrity = true
+        labelData.hasValidIntegrity = labelData.hasIntegrity ? true : undefined
         labelData.usesUnsupportedHash = false
         labelData.hasMalformedIntegrity = false
-        labelData.hasValidCrossorigin = true
+        labelData.hasValidCrossorigin = labelData.hasCrossorigin ? true : undefined
         for (const message of result.logs) {
 
             if (RegExp("^Subresource Integrity: The resource '.*' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not\. The resource has been blocked because the integrity cannot be enforced\.$").test(message.text)) {
@@ -54,6 +52,14 @@ function label(data) {
             }
 
             else if (RegExp("^Access to (script|CSS stylesheet){1} at '.*' from origin '.*' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '\\*' when the request's credentials mode is 'include'\.$").test(message.text)) {
+                labelData.hasValidIntegrity = undefined
+                labelData.usesUnsupportedHash = false
+                labelData.hasMalformedIntegrity = undefined
+                labelData.hasValidCrossorigin = false
+                break
+            }
+
+            else if(RegExp("^Access to (script|CSS stylesheet) at '.*' from origin '.*' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource\.$").test(message.text)) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
@@ -73,7 +79,7 @@ function label(data) {
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = true
                 labelData.hasMalformedIntegrity = false
-                labelData.hasValidCrossorigin = true
+                labelData.hasValidCrossorigin = labelData.hasCrossorigin ? true : undefined
                 break
             }
 
@@ -81,7 +87,7 @@ function label(data) {
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = true
-                labelData.hasValidCrossorigin = true
+                labelData.hasValidCrossorigin = labelData.hasCrossorigin ? true : undefined
                 break
             }
         }
