@@ -1641,7 +1641,7 @@ describe('Scraper tests', function() {
 
     it('tests if the unmatched log and request entries are saved', async function() {
         // Arrange
-        expectedResult = {
+        const expectedResult = {
             logs: [
                 {
                     "source": "javascript",
@@ -1706,7 +1706,7 @@ describe('Scraper tests', function() {
 
     it('tests if empty integrity does not match unrelated logs', async function() {
         // Arrange
-        expectedResult = [
+        const expectedResult = [
             {
                 "element": "LINK",
                 "document": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
@@ -1781,6 +1781,88 @@ describe('Scraper tests', function() {
 
         // Act
         var result = await scrape(origin+'/assets/html/empty_integrity_matches_unrelated_logs.html')
+        result = stripFluidFieldsOfTag(result.tags)
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }).timeout(60000)
+
+    it('tests if multiple entries with same integrity does not match unrelated logs', async function() {
+        // Arrange
+        const expectedResult = [
+            {
+                "element": "SCRIPT",
+                "document": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
+                "attributes": {
+                    "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
+                    "crossorigin": "anonymous",
+                    "src": "http://127.0.0.1:9616/assets/js/some_script.js"
+                },
+                "target": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
+                "requests": [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/js/some_script.js",
+                        "method": "GET",
+                        "type": "Script",
+                        "status": 200,
+                        "size": 316,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "b5ce71442f5678d8e54851c832579318c2d139b1582aa7b5bdd6c482f1e26121",
+                        "failureReason": undefined,
+                        "redirectedTo": undefined,
+                        "redirectedFrom": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html"
+                        ]
+                    }
+                ],
+                "logs": []
+            },
+            {
+                "element": "SCRIPT",
+                "document": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
+                "attributes": {
+                    "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT foo666-deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdead",
+                    "crossorigin": "anonymous",
+                    "src": "http://127.0.0.1:9616/assets/js/some_script.js"
+                },
+                "target": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
+                "requests": [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/js/some_script.js",
+                        "method": "GET",
+                        "type": "Script",
+                        "status": 200,
+                        "size": 316,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "b5ce71442f5678d8e54851c832579318c2d139b1582aa7b5bdd6c482f1e26121",
+                        "failureReason": undefined,
+                        "redirectedTo": undefined,
+                        "redirectedFrom": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html"
+                        ]
+                    }
+                ],
+                "logs": [
+                    {
+                        "source": "security",
+                        "level": "error",
+                        "text": "Error parsing 'integrity' attribute ('sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT foo666-deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdead'). The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'.",
+                        "url": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html"
+                    }
+                ]
+            }
+        ]
+
+        // Act
+        var result = await scrape(origin+'/assets/html/same_integrity_matches_unrelated_logs.html')
         result = stripFluidFieldsOfTag(result.tags)
 
         // Assert
