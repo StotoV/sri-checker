@@ -1703,4 +1703,87 @@ describe('Scraper tests', function() {
         // Assert
         assert.deepEqual(result, expectedResult)
     }).timeout(60000)
+
+    it('tests if empty integrity does not match unrelated logs', async function() {
+        // Arrange
+        expectedResult = [
+            {
+                "element": "LINK",
+                "document": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
+                "attributes": {
+                    "integrity": "",
+                    "rel": "stylesheet",
+                    "href": "http://127.0.0.1:9615/assets/css/some_css.css"
+                },
+                "target": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
+                "requests": [
+                    {
+                        "url": "http://127.0.0.1:9615/assets/css/some_css.css",
+                        "method": "GET",
+                        "type": "Stylesheet",
+                        "status": 200,
+                        "size": 316,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "5ce2d1b9aca15041314794941fd346ea2e6d361060174de6102691a7341e80f2",
+                        "failureReason": undefined,
+                        "redirectedTo": undefined,
+                        "redirectedFrom": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html"
+                        ]
+                    }
+                ],
+                "logs": []
+            },
+            {
+                "element": "LINK",
+                "document": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
+                "attributes": {
+                    "integrity": "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
+                    "crossorigin": "anonymous",
+                    "rel": "stylesheet",
+                    "href": "http://127.0.0.1:9616/assets/css/some_css.css"
+                },
+                "target": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
+                "requests": [
+                    {
+                        "url": "http://127.0.0.1:9616/assets/css/some_css.css",
+                        "method": "GET",
+                        "type": "Stylesheet",
+                        "status": 200,
+                        "size": 316,
+                        "remoteIPAddress": "127.0.0.1",
+                        "responseHeaders": {
+                            "access-control-allow-origin": "*"
+                        },
+                        "responseBodyHash": "5ce2d1b9aca15041314794941fd346ea2e6d361060174de6102691a7341e80f2",
+                        "failureReason": undefined,
+                        "redirectedTo": undefined,
+                        "redirectedFrom": undefined,
+                        "initiators": [
+                            "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html"
+                        ]
+                    }
+                ],
+                "logs": [
+                    {
+                        "source": "security",
+                        "level": "error",
+                        "text": "Failed to find a valid digest in the 'integrity' attribute for resource 'http://127.0.0.1:9616/assets/css/some_css.css' with computed SHA-384 integrity 'Iw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN'. The resource has been blocked.",
+                        "url": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html"
+                    }
+                ]
+            }
+        ]
+
+        // Act
+        var result = await scrape(origin+'/assets/html/empty_integrity_matches_unrelated_logs.html')
+        result = stripFluidFieldsOfTag(result.tags)
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }).timeout(60000)
 })
