@@ -55,11 +55,13 @@ async function checkURL (target, outPath) {
         process.exit(1)
     }
 
+    const replacer = (key, value) => typeof value === 'undefined' ? null : value
+
     const scrapeResult = await scrape(target)
-    await fs.writeFileSync(outPath + '/scrape.json', JSON.stringify(scrapeResult, null, 2));
+    await fs.writeFileSync(outPath + '/scrape.json', JSON.stringify(scrapeResult, replacer, 2))
 
     const labelResult = await label(scrapeResult.tags)
-    await fs.writeFileSync(outPath + '/label.json', JSON.stringify(labelResult, null, 2));
+    await fs.writeFileSync(outPath + '/label.json', JSON.stringify(labelResult, replacer, 2))
 
     logger.verbose('Done with all tests for URL: ' + target)
     process.exit(0)
