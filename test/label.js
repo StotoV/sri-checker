@@ -34,7 +34,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        let result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['target', 'pageUsesHttps'])
 
         // Assert
@@ -83,7 +83,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        let result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['target', 'resource'])
 
         // Assert
@@ -118,7 +118,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        let result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['resource'])
 
         // Assert
@@ -175,7 +175,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        let result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['resourceUsesHttps'])
 
         // Assert
@@ -242,7 +242,7 @@ describe('Labeler tests', function() {
         )
 
         // Act
-        const result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['resourceCrossOrigin'])
 
         // Assert
@@ -295,7 +295,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        const result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['hasIntegrity'])
 
         // Assert
@@ -358,7 +358,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        const result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['hasCrossorigin'])
 
         // Assert
@@ -539,7 +539,7 @@ describe('Labeler tests', function() {
         ]
 
         // Act
-        const result = label(input)
+        let result = label('https://example.com', input)
         onlyKeepRelevantFields(result, ['hasValidIntegrity', 'usesUnsupportedHash', 'hasMalformedIntegrity', 'hasValidCrossorigin'])
 
         // Assert

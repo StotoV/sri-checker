@@ -1,11 +1,12 @@
 const log = logger.child({module: 'labeler'})
 
 /**
- * @param {ScrapeResult[]} data
+ * @param {string}          target
+ * @param {ScrapeResult[]}  data
  * @returns {LabelData[]}
  */
-function label(data) {
-    log.verbose('Starting labeling the data')
+function label(target, data) {
+    log.verbose('[Labeler] Starting labeling job for ' + target)
 
     var labelDataList = []
     for (const result of data) {
@@ -98,7 +99,7 @@ function label(data) {
         labelDataList.push(labelData)
     }
 
-    log.verbose('Done labeling the data')
+    log.verbose('[Labeler] Done with labeling job for ' + target)
     return labelDataList
 }
 

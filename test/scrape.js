@@ -1,6 +1,6 @@
-const assert = require('assert');
-const connect = require('connect');
-const serveStatic = require('serve-static');
+const assert = require('assert')
+const connect = require('connect')
+const serveStatic = require('serve-static')
 const http = require('http')
 const url = require('url')
 const fs = require('fs')
@@ -51,10 +51,10 @@ describe('Scraper tests', function() {
     before(function() {
         const serverFunction = function(request, response) {
             var requestUrl = url.parse(request.url)    
-            response.setHeader('Access-Control-Allow-Origin', '*');
-            response.setHeader('Access-Control-Request-Method', '*');
-            response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-            response.setHeader('Access-Control-Allow-Headers', '*');
+            response.setHeader('Access-Control-Allow-Origin', '*')
+            response.setHeader('Access-Control-Request-Method', '*')
+            response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+            response.setHeader('Access-Control-Allow-Headers', '*')
             response.writeHead(200)
             fs.createReadStream(__dirname + requestUrl.pathname).pipe(response)
         }
@@ -135,8 +135,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -223,8 +223,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_integrity.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_integrity.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -299,8 +299,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -391,8 +391,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_integrity_invalid_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_integrity_invalid_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -482,8 +482,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -576,8 +576,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -662,8 +662,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_non_supported_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_non_supported_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -748,8 +748,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_malformed_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_malformed_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -826,8 +826,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_multiple_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_multiple_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -904,8 +904,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -982,8 +982,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/iframe_cross_origin_integrity.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/iframe_cross_origin_integrity.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -1074,8 +1074,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepStrictEqual(result, expectedResult)
@@ -1148,8 +1148,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/same_origin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/same_origin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1222,8 +1222,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/same_origin_integrity.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/same_origin_integrity.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1312,8 +1312,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/same_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/same_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1388,8 +1388,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/same_origin_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/same_origin_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1447,8 +1447,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1506,8 +1506,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1604,8 +1604,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1669,8 +1669,8 @@ describe('Scraper tests', function() {
         }
 
         // Act
-        var result = await scrape(origin+'/assets/html/unmatched_log_and_request.html')
-        result = stripFluidFieldsOfUnmatched(result.unmatched)
+        var result = await scrape([origin+'/assets/html/unmatched_log_and_request.html'])
+        result = stripFluidFieldsOfUnmatched(result.scrapeResult[0].unmatched)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1752,8 +1752,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/empty_integrity_matches_unrelated_logs.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/empty_integrity_matches_unrelated_logs.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
@@ -1834,8 +1834,8 @@ describe('Scraper tests', function() {
         ]
 
         // Act
-        var result = await scrape(origin+'/assets/html/same_integrity_matches_unrelated_logs.html')
-        result = stripFluidFieldsOfTag(result.tags)
+        var result = await scrape([origin+'/assets/html/same_integrity_matches_unrelated_logs.html'])
+        result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
 
         // Assert
         assert.deepEqual(result, expectedResult)
