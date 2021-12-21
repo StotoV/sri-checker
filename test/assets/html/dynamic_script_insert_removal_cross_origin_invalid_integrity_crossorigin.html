@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Dynamic script insert and removal with invalid integrity and valid cross origin</title>
+    </head>
+    <body>
+        <div id="script_container"></div>
+        <script>
+            var container = document.getElementById('script_container')
+            var script = document.createElement('script')
+            script.setAttribute('src', 'http://127.0.0.1:9616/assets/js/some_script.js')
+            script.setAttribute('crossorigin', 'anonymous')
+            script.setAttribute('integrity', 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT')
+            container.appendChild(script)
+            container.removeChild(container.firstChild)
+        </script>
+    </body>
+</html>

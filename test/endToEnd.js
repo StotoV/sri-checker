@@ -378,12 +378,16 @@ describe('End to end tests', function() {
                 "hasValidIntegrity": null,
                 "usesUnsupportedHash": false,
                 "hasMalformedIntegrity": false,
-                "hasValidCrossorigin": null            }
+                "hasValidCrossorigin": null
+            }
         ]
 
         // Act
-        await checkURL('https://w3c-test.org/subresource-integrity/subresource-integrity.html', './output')
+        await checkURL(['https://w3c-test.org/subresource-integrity/subresource-integrity.html'], './output')
         var result = JSON.parse(fs.readFileSync('./output/label.json', 'utf8'))
+        console.log(JSON.stringify(result, null, 2))
+        result = result.labelResult[0]
+        console.log(JSON.stringify(result, null, 2))
         onlyKeepRelevantFields(result, ['target', 'pageUsesHttps', 'resourceUsesHttps', 'resourceCrossOrigin',
                                         'hasIntegrity', 'hasCrossorigin', 'hasValidIntegrity',
                                         'usesUnsupportedHash', 'hasMalformedIntegrity', 'hasValidCrossorigin'])

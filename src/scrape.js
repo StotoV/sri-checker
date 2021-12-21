@@ -1,7 +1,12 @@
-const { crawler, RequestCollector} = require('tracker-radar-collector');
+const { crawler, RequestCollector} = require('tracker-radar-collector')
+const os = require('os')
+const cores = os.cpus().length
+const fs = require('fs')
+const async = require('async')
 
 const SRITagCollector = require('./collectors/SRITagCollector.js')
 const LogCollector = require('./collectors/LogCollector.js')
+const label = require('./label.js')
 
 const log = logger.child({module: 'scraper'})
 
@@ -34,24 +39,7 @@ function getMatchingLogs(tag, logs) {
     return matchedLogs
 }
 
-/**
- * Scrapes the given URL on SRI relevant tags
- *
- * @param       {string}    target      The URL that will be scraped
- * @returns     {ScraperOutput}        The scraped elements in JSON format
- *
- */
-async function scrape(target) {
-    log.verbose('Starting scraping ' + target)
-
-    const collectors = [new RequestCollector(), new LogCollector(), new SRITagCollector()]
-    const collectedData = await crawler(new URL(target), {
-        collectors: collectors,
-        log: (msg) => {log.verbose('[Crawler] ' + msg)},
-        runInEveryFrame: true,
-        executablePath: '/usr/bin/chromium' // To be removed if at all possible
-    })
-
+async function dataProcesser(target, collectedData) {
     var tags = []
     var unmatchedNetworkRequests = [...collectedData.data.requests]
     var unmatchedLogs = [...collectedData.data.logs]
@@ -66,19 +54,73 @@ async function scrape(target) {
         tags.push(tag)
     }
 
-    const out = {
+    for (var i=0;i<unmatchedNetworkRequests.length;i++) {
+        const request = unmatchedNetworkRequests.shift()
+        if (request.type == 'Script' || request.type == 'Link') {
+            var tag = {
+                target: target,
+                document: request.initiators[0],
+                attributes: {}
+            }
+            if (request.type == 'Script') {
+                tag.element = 'SCRIPT'
+                tag.attributes.src = request.url
+            } else if (request.type == 'Link') {
+                tag.element = 'LINK'
+                tag.attributes.href = request.url
+            }
+            tag['requests'] = [request]
+            tag['logs'] = getMatchingLogs(tag, unmatchedLogs)
+
+            unmatchedLogs = unmatchedLogs.filter(logEntry => {return !tag['logs'].includes(logEntry)})
+            
+            tags.push(tag)
+        } else {
+            unmatchedNetworkRequests.push(request)
+        }
+    }
+
+    const scrapeResult = {
         tags: tags,
         unmatched: {
             requests: unmatchedNetworkRequests,
             logs: unmatchedLogs
         }
     }
+    const labelResult = await label(target, scrapeResult.tags)
 
+    return { scrapeResult: scrapeResult, labelResult: labelResult }
+}
 
-    // const replacer = (key, value) => typeof value === 'undefined' ? null : value
-    // log.verbose(JSON.stringify(out, replacer, 2))
-    log.verbose('Done scraping ' + target)
-    return out
+/**
+ * Scrapes the given URL on SRI relevant tags
+ *
+ * @param       {string}                            targets     The URLs that will be scraped
+ * @returns     {ScrapeResult[], LabelResult[]}
+ *
+ */
+async function scrape(targets) {
+    workers = cores - 1
+    log.verbose('Number or workers: ' + workers)
+    log.verbose('Number of targets: ' + targets.length)
+
+    var labelOut = {}
+    var scrapeOut = {}
+    await async.eachOfLimit(targets, workers, async (target, idx, callback) => {
+        const collectors = [new RequestCollector(), new LogCollector(), new SRITagCollector()]
+        const collectedData = await crawler(new URL(target), {
+            collectors: collectors,
+            log: (msg) => {log.verbose('[Scraper]['+ idx + '] ' + msg)},
+            runInEveryFrame: true,
+            executablePath: '/usr/bin/chromium' // To be removed if at all possible
+        })
+
+        const { scrapeResult, labelResult } = await dataProcesser(target, collectedData)
+        scrapeOut[idx] = scrapeResult
+        labelOut[idx] = labelResult
+    })
+
+    return { scrapeResult:  scrapeOut, labelResult: labelOut }
 }
 
 module.exports = scrape

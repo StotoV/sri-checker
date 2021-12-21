@@ -1,11 +1,12 @@
 const log = logger.child({module: 'labeler'})
 
 /**
- * @param {ScrapeResult[]} data
+ * @param {string}          target
+ * @param {ScrapeResult[]}  data
  * @returns {LabelData[]}
  */
-function label(data) {
-    log.verbose('Starting labeling the data')
+function label(target, data) {
+    log.verbose('[Labeler] Starting labeling job for ' + target)
 
     var labelDataList = []
     for (const result of data) {
@@ -44,9 +45,11 @@ function label(data) {
         for (const message of result.logs) {
 
             if (RegExp("^Subresource Integrity: The resource '.*' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not\. The resource has been blocked because the integrity cannot be enforced\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
+                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
@@ -55,6 +58,7 @@ function label(data) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
+                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
@@ -63,11 +67,13 @@ function label(data) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
+                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
                 
             else if (RegExp("^Failed to find a valid digest in the 'integrity' attribute for resource '.*' with computed SHA-(256|384|512){1} integrity '.*'\. The resource has been blocked\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = false
@@ -76,6 +82,7 @@ function label(data) {
             }
 
             else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = true
                 labelData.hasMalformedIntegrity = false
@@ -84,6 +91,7 @@ function label(data) {
             }
 
             else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The hash algorithm must be one of 'sha256', 'sha384', or 'sha512', followed by a '-' character\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = true
@@ -98,7 +106,7 @@ function label(data) {
         labelDataList.push(labelData)
     }
 
-    log.verbose('Done labeling the data')
+    log.verbose('[Labeler] Done with labeling job for ' + target)
     return labelDataList
 }
 
