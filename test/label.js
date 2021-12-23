@@ -315,6 +315,47 @@ describe('Labeler tests', function() {
         assert.deepEqual(result, expectedResult)
     }),
 
+    it('tests labeler sets proper emptyIntegrity and emptyCrossorigin', function() {
+        // Arrange
+        const input = [
+            {
+                target: 'https://example.com',
+                complete: true,
+                attributes: {
+                    integrity: '',
+                    crossorigin: ''
+                },
+                logs: []
+            },
+            {
+                target: 'https://example.com',
+                complete: true,
+                attributes: {
+                    integrity: 'sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT',
+                    crossorigin: 'anonymous'
+                },
+                logs: []
+            },
+        ]
+        let expectedResult = [
+            {
+                emptyIntegrity: true,
+                emptyCrossorigin: true
+            },
+            {
+                emptyIntegrity: false,
+                emptyCrossorigin: false
+            }
+        ]
+
+        // Act
+        let result = label('https://example.com', input)
+        onlyKeepRelevantFields(result, ['emptyIntegrity', 'emptyCrossorigin'])
+
+        // Assert
+        assert.deepEqual(result, expectedResult)
+    }),
+
     it('tests labeler sets proper hasCrossorigin', function() {
         // Arrange
         const input = [
