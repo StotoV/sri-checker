@@ -36,9 +36,18 @@ function label(target, data) {
                                         new URL(labelData.resource).origin
 
         labelData.complete = result.complete
+        labelData.emptyIntegrity = undefined
+        labelData.emptyCrossorigin = undefined
         if (result.complete) {
             labelData.hasIntegrity = 'integrity' in result.attributes ? true : false
             labelData.hasCrossorigin = 'crossorigin' in result.attributes ? true : false
+
+            if (labelData.hasIntegrity) {
+                labelData.emptyIntegrity = result.attributes.integrity === ''
+            }
+            if (labelData.hasCrossorigin) {
+                labelData.emptyCrossorigin = result.attributes.crossorigin === ''
+            }
         } else {
             labelData.hasIntegrity = undefined
             labelData.hasCrossorigin = undefined
@@ -128,6 +137,8 @@ module.exports = label
  *  @property {boolean}     resourceCrossOrigin
  *  @property {boolean}     hasIntegrity
  *  @property {boolean}     hasCrossorigin
+ *  @property {boolean}     emptyIntegrity
+ *  @property {boolean}     emptyCrossorigin
  *  @property {boolean}     hasValidIntegrity
  *  @property {boolean}     hasInvalidIntegrity
  *  @property {boolean}     hasMalformedIntegrity
