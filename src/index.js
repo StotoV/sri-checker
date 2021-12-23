@@ -42,8 +42,10 @@ async function checkURL (targets, outPath) {
     }
 
     const { scrapeResult, labelResult } = await scrape(targets)
-    await fs.writeFileSync(outPath + '/scrape.json', JSON.stringify(scrapeResult, null, 2));
-    await fs.writeFileSync(outPath + '/label.json', JSON.stringify(labelResult, null, 2));
+
+    const replacer = (key, value) => typeof value === 'undefined' ? null : value
+    await fs.writeFileSync(outPath + '/scrape.json', JSON.stringify(scrapeResult, replacer, 2));
+    await fs.writeFileSync(outPath + '/label.json', JSON.stringify(labelResult, replacer, 2));
 
     logger.info('Done with scraping the target(s)')
     process.exit(0)

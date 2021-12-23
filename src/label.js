@@ -25,7 +25,7 @@ function label(target, data) {
                 break
         }
 
-        labelData.resourceUsesHttps = false
+        labelData.resourceUsesHttps = undefined
         if (labelData.resource != undefined) {
             labelData.resource = new URL(labelData.resource ,labelData.target).toString()
             labelData.resourceUsesHttps = new URL(labelData.resource).protocol == 'https:'
@@ -35,8 +35,14 @@ function label(target, data) {
                                         new URL(labelData.target).origin !=
                                         new URL(labelData.resource).origin
 
-        labelData.hasIntegrity = 'integrity' in result.attributes
-        labelData.hasCrossorigin = 'crossorigin' in result.attributes
+        labelData.complete = result.complete
+        if (result.complete) {
+            labelData.hasIntegrity = 'integrity' in result.attributes ? true : false
+            labelData.hasCrossorigin = 'crossorigin' in result.attributes ? true : false
+        } else {
+            labelData.hasIntegrity = undefined
+            labelData.hasCrossorigin = undefined
+        }
 
         labelData.hasValidIntegrity = labelData.hasIntegrity ? true : undefined
         labelData.usesUnsupportedHash = false
@@ -45,6 +51,7 @@ function label(target, data) {
         for (const message of result.logs) {
 
             if (RegExp("^Subresource Integrity: The resource '.*' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not\. The resource has been blocked because the integrity cannot be enforced\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
@@ -56,6 +63,7 @@ function label(target, data) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
+                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
@@ -64,11 +72,13 @@ function label(target, data) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
+                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
                 
             else if (RegExp("^Failed to find a valid digest in the 'integrity' attribute for resource '.*' with computed SHA-(256|384|512){1} integrity '.*'\. The resource has been blocked\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = false
@@ -77,6 +87,7 @@ function label(target, data) {
             }
 
             else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The specified hash algorithm must be one of 'sha256', 'sha384', or 'sha512'\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = true
                 labelData.hasMalformedIntegrity = false
@@ -85,6 +96,7 @@ function label(target, data) {
             }
 
             else if (RegExp("^Error parsing 'integrity' attribute \\('.*'\\)\. The hash algorithm must be one of 'sha256', 'sha384', or 'sha512', followed by a '-' character\.$").test(message.text)) {
+                labelData.hasIntegrity = true
                 labelData.hasValidIntegrity = false
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = true
@@ -110,6 +122,7 @@ module.exports = label
  *
  *  @property {string}      origin
  *  @property {string}      resource
+ *  @property {boolean}     complete
  *  @property {boolean}     pageUsesHttps
  *  @property {boolean}     resourceUsesHttps
  *  @property {boolean}     resourceCrossOrigin
