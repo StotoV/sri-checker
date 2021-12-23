@@ -25,7 +25,7 @@ function label(target, data) {
                 break
         }
 
-        labelData.resourceUsesHttps = false
+        labelData.resourceUsesHttps = undefined
         if (labelData.resource != undefined) {
             labelData.resource = new URL(labelData.resource ,labelData.target).toString()
             labelData.resourceUsesHttps = new URL(labelData.resource).protocol == 'https:'
@@ -35,8 +35,14 @@ function label(target, data) {
                                         new URL(labelData.target).origin !=
                                         new URL(labelData.resource).origin
 
-        labelData.hasIntegrity = 'integrity' in result.attributes
-        labelData.hasCrossorigin = 'crossorigin' in result.attributes
+        labelData.complete = result.complete
+        if (result.complete) {
+            labelData.hasIntegrity = 'integrity' in result.attributes ? true : false
+            labelData.hasCrossorigin = 'crossorigin' in result.attributes ? true : false
+        } else {
+            labelData.hasIntegrity = undefined
+            labelData.hasCrossorigin = undefined
+        }
 
         labelData.hasValidIntegrity = labelData.hasIntegrity ? true : undefined
         labelData.usesUnsupportedHash = false
@@ -49,7 +55,6 @@ function label(target, data) {
                 labelData.hasValidIntegrity = undefined
                 labelData.usesUnsupportedHash = false
                 labelData.hasMalformedIntegrity = undefined
-                labelData.hasCrossorigin = true
                 labelData.hasValidCrossorigin = false
                 break
             }
@@ -117,6 +122,7 @@ module.exports = label
  *
  *  @property {string}      origin
  *  @property {string}      resource
+ *  @property {boolean}     complete
  *  @property {boolean}     pageUsesHttps
  *  @property {boolean}     resourceUsesHttps
  *  @property {boolean}     resourceCrossOrigin

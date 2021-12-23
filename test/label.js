@@ -170,7 +170,7 @@ describe('Labeler tests', function() {
                 resourceUsesHttps: true
             },
             {
-                resourceUsesHttps: false
+                resourceUsesHttps: undefined
             },
         ]
 
@@ -254,6 +254,7 @@ describe('Labeler tests', function() {
         const input = [
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     integrity: ''
                 },
@@ -261,6 +262,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     integrity: 'sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
                 },
@@ -268,6 +270,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     integrity: 'sha384-xTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT'
                 },
@@ -275,6 +278,13 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
+                attributes: {},
+                logs: []
+            },
+            {
+                target: 'https://example.com',
+                complete: false,
                 attributes: {},
                 logs: []
             }
@@ -291,6 +301,9 @@ describe('Labeler tests', function() {
             },
             {
                 hasIntegrity: false
+            },
+            {
+                hasIntegrity: undefined
             }
         ]
 
@@ -307,6 +320,7 @@ describe('Labeler tests', function() {
         const input = [
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     crossorigin: ''
                 },
@@ -314,6 +328,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     crossorigin: 'anonymous'
                 },
@@ -321,6 +336,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     crossorigin: 'use-credentials'
                 },
@@ -328,6 +344,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 attributes: {
                     crossorigin: 'malformed'
                 },
@@ -335,6 +352,13 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
+                attributes: {},
+                logs: []
+            },
+            {
+                target: 'https://example.com',
+                complete: false,
                 attributes: {},
                 logs: []
             }
@@ -354,6 +378,9 @@ describe('Labeler tests', function() {
             },
             {
                 hasCrossorigin: false
+            },
+            {
+                hasCrossorigin: undefined
             }
         ]
 
@@ -370,6 +397,7 @@ describe('Labeler tests', function() {
         const input = [
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -383,6 +411,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -396,6 +425,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'LINK',
                 attributes: {
                     href: 'https://example2.com/assets/css/some_css.css',
@@ -409,6 +439,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -423,6 +454,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -437,6 +469,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -451,6 +484,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',
@@ -461,6 +495,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js'
@@ -469,6 +504,7 @@ describe('Labeler tests', function() {
             },
             {
                 target: 'https://example.com',
+                complete: true,
                 element: 'SCRIPT',
                 attributes: {
                     src: 'https://example2.com/assets/js/some_script.js',

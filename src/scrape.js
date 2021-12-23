@@ -44,6 +44,7 @@ async function dataProcesser(target, collectedData) {
     var unmatchedNetworkRequests = [...collectedData.data.requests]
     var unmatchedLogs = [...collectedData.data.logs]
     for (const tag of collectedData.data.SRITag) {
+        tag['complete'] = true
         tag['target'] = target
         tag['requests'] = getMatchingNetworkRequests(tag, collectedData.data.requests)
         tag['logs'] = getMatchingLogs(tag, collectedData.data.logs)
@@ -54,18 +55,20 @@ async function dataProcesser(target, collectedData) {
         tags.push(tag)
     }
 
-    for (var i=0;i<unmatchedNetworkRequests.length;i++) {
+    const len = unmatchedNetworkRequests.length
+    for (var i=0;i<len;i++) {
         const request = unmatchedNetworkRequests.shift()
-        if (request.type == 'Script' || request.type == 'Link') {
+        if (request.type == 'Script' || request.type == 'Stylesheet') {
             var tag = {
                 target: target,
                 document: request.initiators[0],
-                attributes: {}
+                attributes: {},
+                complete: false
             }
             if (request.type == 'Script') {
                 tag.element = 'SCRIPT'
                 tag.attributes.src = request.url
-            } else if (request.type == 'Link') {
+            } else if (request.type == 'Stylesheet') {
                 tag.element = 'LINK'
                 tag.attributes.href = request.url
             }
@@ -138,6 +141,7 @@ module.exports = scrape
  * @property {string}           target
  * @property {string}           element         Element type of the tag (STRING or LINK)
  * @property {TagAttributes[]}  attributes      List of attributes of the tag
+ * @property {boolean}          complete      If the tag is foud via the DOM or via an unmatched network request
  * @property {string}           document        Document URL of that the tag was found in
  * @property {RequestData[]}    requests
  * @property {LogData[]}        logs

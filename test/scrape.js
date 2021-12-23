@@ -75,6 +75,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 attributes: {
@@ -104,6 +105,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
+                complete: true,
                 element: 'LINK',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin.html',
                 attributes: {
@@ -147,6 +149,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 attributes: {
@@ -184,6 +187,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity.html',
                 attributes: {
@@ -235,6 +239,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 attributes: {
@@ -266,6 +271,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_crossorigin.html',
                 attributes: {
@@ -311,6 +317,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 attributes: {
@@ -350,6 +357,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_integrity_invalid_crossorigin.html',
                 attributes: {
@@ -404,6 +412,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -442,6 +451,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -496,6 +506,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
                 attributes: {
@@ -535,6 +546,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_invalid_integrity_invalid_crossorigin.html',
                 attributes: {
@@ -591,6 +603,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 attributes: {
@@ -629,6 +642,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_non_supported_integrity_crossorigin.html',
                 attributes: {
@@ -677,6 +691,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 attributes: {
@@ -715,6 +730,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_malformed_integrity_crossorigin.html',
                 attributes: {
@@ -762,6 +778,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 attributes: {
@@ -793,6 +810,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_crossorigin.html',
                 attributes: {
@@ -840,6 +858,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 attributes: {
@@ -871,6 +890,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9615/assets/html/cross_origin_multiple_integrity_one_wrong_crossorigin.html',
                 attributes: {
@@ -918,6 +938,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_integrity_destination.html',
                 attributes: {
@@ -949,6 +970,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_integrity.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_integrity_destination.html',
                 attributes: {
@@ -996,6 +1018,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
@@ -1034,6 +1057,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/iframe_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9616/assets/html/iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
@@ -1088,6 +1112,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 attributes: {
@@ -1117,6 +1142,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin.html',
+                complete: true,
                 element: 'LINK',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin.html',
                 attributes: {
@@ -1160,6 +1186,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 attributes: {
@@ -1190,6 +1217,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
+                complete: true,
                 element: 'LINK',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity.html',
                 attributes: {
@@ -1234,6 +1262,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -1272,6 +1301,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'LINK',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -1324,6 +1354,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 attributes: {
@@ -1355,6 +1386,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
+                complete: true,
                 element: 'LINK',
                 document: 'http://127.0.0.1:9615/assets/html/same_origin_integrity_crossorigin.html',
                 attributes: {
@@ -1400,6 +1432,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -1438,6 +1471,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {},
@@ -1459,6 +1493,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
@@ -1497,6 +1532,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9616/assets/html/dynamic_script_insert_iframe_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {},
@@ -1518,6 +1554,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9616/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
@@ -1556,6 +1593,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: "LINK",
                 document: 'http://127.0.0.1:9616/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin_destination.html',
                 attributes: {
@@ -1595,6 +1633,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html',
+                complete: true,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/dynamic_iframe_insert_cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {},
@@ -1681,6 +1720,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 "element": "LINK",
+                "complete": true,
                 "document": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
                 "attributes": {
                     "integrity": "",
@@ -1712,6 +1752,7 @@ describe('Scraper tests', function() {
             },
             {
                 "element": "LINK",
+                "complete": true,
                 "document": "http://127.0.0.1:9615/assets/html/empty_integrity_matches_unrelated_logs.html",
                 "attributes": {
                     "integrity": "sha384-xw54E1Wcqvl8hgVdh49U+WwaGqHp5YstLOVgpoFxv7pT4Lm36Cce7hQ4ZfeXY9wN",
@@ -1764,6 +1805,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 "element": "SCRIPT",
+                "complete": true,
                 "document": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
                 "attributes": {
                     "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT",
@@ -1795,6 +1837,7 @@ describe('Scraper tests', function() {
             },
             {
                 "element": "SCRIPT",
+                "complete": true,
                 "document": "http://127.0.0.1:9615/assets/html/same_integrity_matches_unrelated_logs.html",
                 "attributes": {
                     "integrity": "sha384-OTB95wikPeum8g0co00sBi/YoX8Si1NHyQGdqrOYBGyoKpbqgUntzjW/ACajRLKT foo666-deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdead",
@@ -1846,6 +1889,7 @@ describe('Scraper tests', function() {
         const expectedResult = [
             {
                 "element": "SCRIPT",
+                "complete": true,
                 "document": "http://127.0.0.1:9615/assets/html/dynamic_script_insert_removal_cross_origin_invalid_integrity_crossorigin.html",
                 "attributes": {},
                 "target": "http://127.0.0.1:9615/assets/html/dynamic_script_insert_removal_cross_origin_invalid_integrity_crossorigin.html",
@@ -1854,6 +1898,7 @@ describe('Scraper tests', function() {
             },
             {
                 target: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_removal_cross_origin_invalid_integrity_crossorigin.html',
+                complete: false,
                 element: 'SCRIPT',
                 document: 'http://127.0.0.1:9615/assets/html/dynamic_script_insert_removal_cross_origin_invalid_integrity_crossorigin.html',
                 attributes: {
@@ -1892,9 +1937,7 @@ describe('Scraper tests', function() {
 
         // Act
         var result = await scrape([origin+'/assets/html/dynamic_script_insert_removal_cross_origin_invalid_integrity_crossorigin.html'])
-        console.log(JSON.stringify(result, null, 2))
         result = stripFluidFieldsOfTag(result.scrapeResult[0].tags)
-
 
         // Assert
         assert.deepEqual(result, expectedResult)
