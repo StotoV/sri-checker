@@ -102,7 +102,7 @@ async function dataProcesser(target, collectedData) {
  * @returns     {ScrapeResult[], LabelResult[]}
  *
  */
-async function scrape(targets) {
+async function scrape(targets, outPath) {
     workers = cores - 1
     log.verbose('Number or workers: ' + workers)
     log.verbose('Number of targets: ' + targets.length)
@@ -110,17 +110,27 @@ async function scrape(targets) {
     var labelOut = {}
     var scrapeOut = {}
     await async.eachOfLimit(targets, workers, async (target, idx, callback) => {
-        const collectors = [new RequestCollector(), new LogCollector(), new SRITagCollector()]
-        const collectedData = await crawler(new URL(target), {
-            collectors: collectors,
-            log: (msg) => {log.verbose('[Scraper]['+ idx + '] ' + msg)},
-            runInEveryFrame: true,
-            executablePath: '/usr/bin/chromium' // To be removed if at all possible
-        })
+        try {
+            const collectors = [new RequestCollector(), new LogCollector(), new SRITagCollector()]
+            const collectedData = await crawler(new URL(target), {
+                collectors: collectors,
+                log: (msg) => {log.verbose('[Scraper]['+ idx + '] ' + msg)},
+                runInEveryFrame: true,
+                executablePath: '/usr/bin/chromium' // To be removed if at all possible
+            })
 
-        const { scrapeResult, labelResult } = await dataProcesser(target, collectedData)
-        scrapeOut[idx] = scrapeResult
-        labelOut[idx] = labelResult
+            const { scrapeResult, labelResult } = await dataProcesser(target, collectedData)
+            // scrapeOut[idx] = scrapeResult
+            // labelOut[idx] = labelResult
+
+            var filename = btoa(target)
+            filename = filename.replace('\/', '-')
+            const replacer = (key, value) => typeof value === 'undefined' ? null : value
+            await fs.writeFileSync(outPath + '/' + filename + '_scrape.json', JSON.stringify(scrapeResult, replacer, 2));
+            await fs.writeFileSync(outPath + '/' + filename + '_label.json', JSON.stringify(labelResult, replacer, 2));
+        } catch (e) {
+            log.error('[Scraper][' + idx + '] ' + target + ' ' + e)
+        }
     })
 
     return { scrapeResult:  scrapeOut, labelResult: labelOut }
