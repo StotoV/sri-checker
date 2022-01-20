@@ -29,6 +29,7 @@
     "homepage": "https://github.com/StotoV/sri-checker#readme",
     "dependencies": {
         "argparse": "^2.0.1",
+        "btoa-atob": "^0.1.2",
         "puppeteer": "^11.0.0",
         "tracker-radar-collector": "github:duckduckgo/tracker-radar-collector",
         "url-parse": "^1.5.3",
