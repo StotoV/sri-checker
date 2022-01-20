@@ -119,9 +119,12 @@ async function scrape(targets, outPath) {
                 executablePath: '/usr/bin/chromium' // To be removed if at all possible
             })
 
+            // Due to some (yet unknown) error, the SRITagCollector can fail with null
+            if (collectedData.data.SRITag == null) {
+                collectedData.data.SRITag = []
+            }
+
             const { scrapeResult, labelResult } = await dataProcesser(target, collectedData)
-            // scrapeOut[idx] = scrapeResult
-            // labelOut[idx] = labelResult
 
             // var filename = btoa(target)
 	    var filename = Buffer.from(target).toString('base64')
