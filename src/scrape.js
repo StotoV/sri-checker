@@ -126,7 +126,8 @@ async function scrape(targets, outPath) {
 
             const { scrapeResult, labelResult } = await dataProcesser(target, collectedData)
 
-            var filename = btoa(target)
+            // var filename = btoa(target)
+	    var filename = Buffer.from(target).toString('base64')
             filename = filename.replace('\/', '-')
             const replacer = (key, value) => typeof value === 'undefined' ? null : value
             await fs.writeFileSync(outPath + '/' + filename + '_scrape.json', JSON.stringify(scrapeResult, replacer, 2));
